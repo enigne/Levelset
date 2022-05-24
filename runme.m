@@ -143,7 +143,9 @@ function varargout=runme(varargin)
 		md.miscellaneous.name = [savePath];
 		%solve
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
-		md.cluster = generic('np',50);
+		md.cluster = cluster;
+      md.settings.waitonlock = waitonlock; % do not wait for complete
+		md.verbose.solution = 1;
 		md=solve(md,'tr');
 
 
