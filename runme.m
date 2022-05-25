@@ -108,11 +108,7 @@ function varargout=runme(varargin)
 		md.levelset.spclevelset = NaN(md.mesh.numberofvertices,1);
 
 		% set ice mask
-		md.mask.ice_levelset = -ones(md.mesh.numberofvertices, 1);
-		fjord = ((md.mesh.x-cx).^2+(md.mesh.y-cy).^2 < radius^2);
-		fjord = fjord | (md.mesh.x>cx) & (md.mesh.y > cy-radius) & (md.mesh.y < cy+radius);
-		md.mask.ice_levelset(fjord) = 1;
-		md.mask.ice_levelset = reinitializelevelset(md, md.mask.ice_levelset);
+		md.mask.ice_levelset = reinitializelevelset(md, setLevelset(md.mesh.x, md.mesh.y, cx, cy, radius));
 
 		savemodel(org,md);
 	end%}}}
