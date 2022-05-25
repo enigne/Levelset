@@ -139,6 +139,16 @@ function varargout=runme(varargin)
       md.levelset.reinit_frequency = levelsetReinit;
       disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
+		% append Lx, Ly, cx, cy, radius, vx and vy to results
+		analyticalSolution.Lx = Lx;
+		analyticalSolution.Ly = Ly;
+		analyticalSolution.cx = cx;
+		analyticalSolution.cy = cy;
+		analyticalSolution.vx = vx;
+		analyticalSolution.vy = vy;
+		analyticalSolution.radius = radius;
+		md.results.analyticalSolution = analyticalSolution;
+
 		%solve
 		md.miscellaneous.name = [savePath];
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
