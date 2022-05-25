@@ -19,7 +19,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, saveflag)
 	cx = time.*vx + cx0;
 	cy = time.*vy + cy0;
 
-	analytical_levelset = setlevelset(md.mesh.x, md.mesh.y, cx, cy, radius);
+	analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cx, cy, radius);
 	disp(['======> Finish calculation ', num2str(size(analytical_levelset))]);
 
 	% save data

@@ -9,7 +9,8 @@ function ice_levelset = setLevelset(x, y, cx, cy, radius)
 	cx = cy(:)';
 
 	numberofvertices = length(x);
-	ice_levelset = -ones(numberofvertices, 1);
+	numberoftime = length(cx);
+	ice_levelset = -ones(numberofvertices, numberoftime);
 	fjord = ((x-cx).^2+(y-cy).^2 < radius^2);
 	fjord = fjord | ((x>cx) & (y > cy-radius) & (y < cy+radius));
 	ice_levelset(fjord) = 1;

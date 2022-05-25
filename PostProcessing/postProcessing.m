@@ -18,9 +18,6 @@ parfor i = 1:Ndata
     org{i}=organizer('repository', [projPath, 'Models/', folderList{i}], 'prefix', ['Model_' glacier '_'], 'steps', steps);
     mdList{i} = loadmodel(org{i}, [stepName, suffixList{1}]);
 end %}}}
-% load analytical solution {{{
-
-%}}}
 % postProcessing {{{
 parfor i = 1:Ndata
 	extractTransientFromMd(mdList{i}, projPath, folderList{i}, dataNameList{i}, saveflag);
