@@ -20,15 +20,15 @@ function varargout=runme(varargin)
 	ny = getfieldvalue(options,'ny',nx);
 	% }}}
 	%GET constant velocity fielld: (1000, 0){{{
-	vx = getfieldvalue(options,'vx', 1000);
+	vx = getfieldvalue(options,'vx', 7500);
 	vy = getfieldvalue(options,'vy', 0);
-	% }}}
-	%GET center of the circle (cx,cy): (Lx/2, Ly/2) {{{
-	cx = getfieldvalue(options,'cx', Lx/2);
-	cy = getfieldvalue(options,'cy', Ly/2);
 	% }}}
 	%GET radius of the circle: min(Lx,Ly)/4 {{{
 	radius = getfieldvalue(options,'radius', min([Lx,Ly])/4);
+	% }}}
+	%GET center of the circle (cx,cy): (Lx/2+radius/2, Ly/2) {{{
+	cx = getfieldvalue(options,'cx', Lx/2+radius/2);
+	cy = getfieldvalue(options,'cy', Ly/2);
 	% }}}
 	%GET steps: [1]{{{
 	steps = getfieldvalue(options,'steps',[1]);
@@ -37,7 +37,7 @@ function varargout=runme(varargin)
 	savePath = getfieldvalue(options,'savePath', '/');
 	% }}}
 	%GET finalTime: 500{{{
-	finalTime = getfieldvalue(options,'finalTime', 500);
+	finalTime = getfieldvalue(options,'finalTime', 50);
 	% }}}
 	%GET jobTime for running on supercomputer: 2 hours{{{
 	jobTime = getfieldvalue(options,'jobTime', 2);
@@ -138,16 +138,18 @@ function varargout=runme(varargin)
 		md=loadmodel(org, 'Transient_Prep');
 
 		% set stabilization
-		md.levelset.reinit_frequency = 1; %does not really help...
-		md.levelset.stabilization=1; %1 art diff, 2: streamline up., 5:SUPG
-		md.miscellaneous.name = [savePath];
+      md.levelset.stabilization = levelsetStabilization;
+      disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
+      md.levelset.reinit_frequency = levelsetReinit;
+      disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
+
 		%solve
+		md.miscellaneous.name = [savePath];
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
 		md.cluster = cluster;
       md.settings.waitonlock = waitonlock; % do not wait for complete
 		md.verbose.solution = 1;
 		md=solve(md,'tr');
-
 
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
