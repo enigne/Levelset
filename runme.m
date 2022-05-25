@@ -19,7 +19,7 @@ function varargout=runme(varargin)
 	nx = getfieldvalue(options,'nx',200);
 	ny = getfieldvalue(options,'ny',nx);
 	% }}}
-	%GET constant velocity fielld: (1000, 0){{{
+	%GET constant velocity fielld: (7500, 0){{{
 	vx = getfieldvalue(options,'vx', 7500);
 	vy = getfieldvalue(options,'vy', 0);
 	% }}}
