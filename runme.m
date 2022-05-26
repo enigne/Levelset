@@ -218,7 +218,7 @@ function varargout=runme(varargin)
 
 		% append the retreat solution to the advance
 		md.results.TransientSolution = [advanceSolutions, md.results.TransientSolution];
-		md.results.analyticalSolution = [md.results.analyticalSolution, analytical_levelset]
+		md.results.analyticalSolution = [md.results.analyticalSolution, analytical_levelset];
 
 		savemodel(org,md);
 		if ~strcmp(savePath, './')

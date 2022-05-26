@@ -6,21 +6,8 @@ function extractTransientFromMd(md, projPath, folder, dataName, saveflag)
 	name = dataName;
 	time = cell2mat({md.results.TransientSolution(:).time});
 	ice_levelset = cell2mat({md.results.TransientSolution(:).MaskIceLevelset});
+	analytical_levelset = md.results.analyticalSolution;
 	disp(['======> Finish data extraction ', folder]);
-
-	disp(['======> Calculate analytical solution']);
-	cx0 = md.results.analyticalSolution.cx;
-	cy0 = md.results.analyticalSolution.cy;
-	vx = md.results.analyticalSolution.vx;
-	vy = md.results.analyticalSolution.vy;
-	radius = md.results.analyticalSolution.radius;
-
-	% time series of the center positions 
-	cx = time.*vx + cx0;
-	cy = time.*vy + cy0;
-
-	analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cx, cy, radius);
-	disp(['======> Finish calculation, size of the solution: ', num2str(size(analytical_levelset))]);
 
 	disp(['======> Calculate the misfit of the two sign functions']);
 	misfit = sign(analytical_levelset) - sign(ice_levelset);

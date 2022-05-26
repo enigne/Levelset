@@ -27,14 +27,14 @@ time = outSol{1}.time;
 %}}}
 %% Create Movie for friction and ice rheology {{{
 if movieFlag
-	nstep = 1;
+	nstep = 4;
 
 	set(0,'defaultfigurecolor',[1, 1, 1])
 	Nt = length(time);
 	Ndata = length(outSol);
 	nframes = floor(Nt/nstep);
-	xl = [0,1e6];
-	yl = [0,1e6];
+	xl = [0.2, 1]*1e6;
+	yl = [0.1,0.9]*1e6;
 
 	clear mov;
 	close all;
