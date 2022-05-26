@@ -8,6 +8,9 @@ figNamePrefix = [projPath, 'PostProcessing/Figures/test_'];
 finalTime = 50;
 
 Id = 0; % Latest experiments
+Id = 1; % stab=1
+%Id = 2; % stab=2
+%Id = 3; % stab=5
 %% Load data {{{
 addpath([projPath, '/PostProcessing/']);
 [folderList, nameList] = getFolderList(Id, 0);
