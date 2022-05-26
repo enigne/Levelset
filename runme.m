@@ -134,10 +134,10 @@ function varargout=runme(varargin)
 		md=loadmodel(org, 'Transient_Prep');
 
 		% set stabilization
-      md.levelset.stabilization = levelsetStabilization;
-      disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
-      md.levelset.reinit_frequency = levelsetReinit;
-      disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
+		md.levelset.stabilization = levelsetStabilization;
+		disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
+		md.levelset.reinit_frequency = levelsetReinit;
+		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
 		% append Lx, Ly, cx, cy, radius, vx and vy to results
 		analyticalSolution.Lx = Lx;
@@ -153,7 +153,7 @@ function varargout=runme(varargin)
 		md.miscellaneous.name = [savePath];
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
 		md.cluster = cluster;
-      md.settings.waitonlock = waitonlock; % do not wait for complete
+		md.settings.waitonlock = waitonlock; % do not wait for complete
 		md.verbose.solution = 1;
 		md=solve(md,'tr');
 
