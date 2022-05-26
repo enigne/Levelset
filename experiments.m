@@ -3,9 +3,9 @@ close all
 
 today = datestr(date(), 'yyyymmdd');
 
-reinit = [0]; %[0, 1, 10, 50, 100];
-stablization = [1];%,2,5];
-steps = [1:4, 6];
+reinit = [0, 1, 10, 50, 100];
+stablization = [1,2,5];
+steps = [6];
 
 for i = 1:length(reinit)
 	for l = 1:length(stablization)
