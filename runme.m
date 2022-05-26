@@ -163,3 +163,61 @@ function varargout=runme(varargin)
 			system(['mv ', projPath, '/Models/Model_', glacier, '_Transient.mat ', projPath, '/Models/', savePath, '/Model_', glacier, '_Transient.mat']);
 		end
 	end%}}}
+	if perform(org, 'Transient_Advance_Retreat')% {{{
+
+		md=loadmodel(org, 'Transient_Prep');
+
+		% set stabilization
+		md.levelset.stabilization = levelsetStabilization;
+		disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
+		md.levelset.reinit_frequency = levelsetReinit;
+		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
+
+		% append Lx, Ly, cx, cy, radius, vx and vy to results
+		analyticalSolution.Lx = Lx;
+		analyticalSolution.Ly = Ly;
+		analyticalSolution.cx = cx;
+		analyticalSolution.cy = cy;
+		analyticalSolution.vx = vx;
+		analyticalSolution.vy = vy;
+		analyticalSolution.radius = radius;
+		md.results.analyticalSolution = analyticalSolution;
+
+		%solve
+		md.miscellaneous.name = [savePath];
+		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
+		md.cluster = cluster;
+		md.settings.waitonlock = waitonlock; % do not wait for complete
+		md.verbose.solution = 1;
+
+		% Advance run
+		md=solve(md,'tr');
+
+		disp(['  ==== Advance run done! '])
+		% save advance run
+		advanceSolutions = md.results.TransientSolution;
+
+		% reset initial condition
+		md.initialization.vx = -vx*ones(md.mesh.numberofvertices, 1);
+		md.initialization.vy = vy*ones(md.mesh.numberofvertices, 1);
+		md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
+		% use the final step advance solution as initial
+		md.mask.ice_levelset = reinitializelevelset(md, md.results.TransientSolution(end).MaskIceLevelset);
+
+		% change time
+		md.timestepping.start_time = finalTime;
+		md.timestepping.final_time = finalTime*2;
+
+		disp(['  ==== Start to run retreat '])
+		% Retreat run
+		md=solve(md,'tr');
+		md.results.TransientSolution = [advanceSolutions, md.results.TransientSolution];
+
+		savemodel(org,md);
+		if ~strcmp(savePath, './')
+			system(['mkdir -p ', projPath, '/Models/', savePath]);
+			system(['mv ', projPath, '/Models/Model_', glacier, '_Transient_Advance_Retreat.mat ', projPath, '/Models/', savePath, '/Model_', glacier, '_Transient.mat']);
+		end
+	end%}}}
+	varargout{1} = md;
+	return;
