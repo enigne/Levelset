@@ -36,7 +36,10 @@ function varargout=runme(varargin)
 	%GET savepath: '/' {{{
 	savePath = getfieldvalue(options,'savePath', '/');
 	% }}}
-	%GET finalTime: 500{{{
+	%GET dt: 0.25{{{
+	dt = getfieldvalue(options,'dt', 0.25);
+	% }}}
+	%GET finalTime: 50{{{
 	finalTime = getfieldvalue(options,'finalTime', 50);
 	% }}}
 	%GET jobTime for running on supercomputer: 2 hours{{{
@@ -124,8 +127,8 @@ function varargout=runme(varargin)
 		md.transient.ismovingfront    = 1;
 
 		md.timestepping.start_time = 0;
-		md.timestepping.time_step  = cfl_step(md, md.initialization.vx, md.initialization.vy);
 		md.timestepping.final_time = finalTime;
+		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
 
 		savemodel(org,md);
 	end%}}}
@@ -173,16 +176,6 @@ function varargout=runme(varargin)
 		md.levelset.reinit_frequency = levelsetReinit;
 		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
-		% append Lx, Ly, cx, cy, radius, vx and vy to results
-		analyticalSolution.Lx = Lx;
-		analyticalSolution.Ly = Ly;
-		analyticalSolution.cx = cx;
-		analyticalSolution.cy = cy;
-		analyticalSolution.vx = vx;
-		analyticalSolution.vy = vy;
-		analyticalSolution.radius = radius;
-		md.results.analyticalSolution = analyticalSolution;
-
 		%solve
 		md.miscellaneous.name = [savePath];
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
@@ -193,10 +186,16 @@ function varargout=runme(varargin)
 		% Advance run
 		md=solve(md,'tr');
 
+		% compute analytical solutions
+		time = cell2mat({md.results.TransientSolution(:).time});
+		cxt = time.*vx + cx;
+		cyt = time.*vy + cy;
+		analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		md.results.analyticalSolution = analytical_levelset;
+
 		disp(['  ==== Advance run done! '])
 		% save advance run
 		advanceSolutions = md.results.TransientSolution;
-
 		% reset initial condition
 		md.initialization.vx = -vx*ones(md.mesh.numberofvertices, 1);
 		md.initialization.vy = vy*ones(md.mesh.numberofvertices, 1);
@@ -205,13 +204,21 @@ function varargout=runme(varargin)
 		md.mask.ice_levelset = reinitializelevelset(md, md.results.TransientSolution(end).MaskIceLevelset);
 
 		% change time
+		finalTime = md.results.TransientSolution(end).time;
 		md.timestepping.start_time = finalTime;
 		md.timestepping.final_time = finalTime*2;
 
 		disp(['  ==== Start to run retreat '])
 		% Retreat run
 		md=solve(md,'tr');
+		
+		% analytial solutions
+      cxt = fliplr(cxt);
+      analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+
+		% append the retreat solution to the advance
 		md.results.TransientSolution = [advanceSolutions, md.results.TransientSolution];
+		md.results.analyticalSolution = [md.results.analyticalSolution, analytical_levelset]
 
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
