@@ -126,10 +126,6 @@ function varargout=runme(varargin)
 		md.transient.isthermal        = 0;
 		md.transient.ismovingfront    = 1;
 
-		md.timestepping.start_time = 0;
-		md.timestepping.final_time = finalTime;
-		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
-
 		savemodel(org,md);
 	end%}}}
 	if perform(org, 'Transient')% {{{
@@ -169,6 +165,11 @@ function varargout=runme(varargin)
 	if perform(org, 'Transient_Advance_Retreat')% {{{
 
 		md=loadmodel(org, 'Transient_Prep');
+
+		% set time
+		md.timestepping.start_time = 0;
+		md.timestepping.final_time = finalTime;
+		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
 
 		% set stabilization
 		md.levelset.stabilization = levelsetStabilization;
