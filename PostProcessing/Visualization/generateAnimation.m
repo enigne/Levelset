@@ -6,7 +6,7 @@ projPath = ['/totten_1/chenggong/', glacier, '/'];
 addpath([projPath, '/PostProcessing/']);
 
 movieFlag = 1;
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_05T'];
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_zeroSide_05T'];
 
 nRows = 5;
 nCols = 3;

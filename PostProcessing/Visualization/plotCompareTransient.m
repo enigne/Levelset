@@ -8,7 +8,7 @@ figNamePrefix = [projPath, 'PostProcessing/Figures/test_'];
 finalTime = 50;
 
 Id = 0; % Latest experiments
-Id = 10; % 0.5T
+Id = 20; % v=0 on the sides
 %Id = 11; % stab=1
 %Id = 12; % stab=2
 %Id = 13; % stab=5
