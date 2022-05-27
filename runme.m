@@ -232,7 +232,7 @@ function varargout=runme(varargin)
 		md=loadmodel(org, 'Transient_Prep');
 
 		% find the side 
-		pos = (md.mesh.y > cy+radius) | (md.mesh.y < cy - radius);
+		pos = (md.mesh.y >= cy+radius) | (md.mesh.y <= cy - radius);
 
 		% set velocity
 		md.initialization.vx = vx*ones(md.mesh.numberofvertices, 1);
