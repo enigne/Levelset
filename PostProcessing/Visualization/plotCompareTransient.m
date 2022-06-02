@@ -11,6 +11,8 @@ Id = 0; % Latest experiments
 Id = 20; % v=0 on the sides
 Id = 30; % 
 Id = 40; % v=0 on the sides
+Id = 51; % rectangle levelset function
+Id = 61; % rectangle levelset function, zero side
 %% Load data {{{
 addpath([projPath, '/PostProcessing/']);
 [folderList, nameList] = getFolderList(Id, 0);

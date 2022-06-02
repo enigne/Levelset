@@ -6,13 +6,15 @@ projPath = ['/totten_1/chenggong/', glacier, '/'];
 addpath([projPath, '/PostProcessing/']);
 
 movieFlag = 1;
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_05T_transInit'];
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_05T_rect_zeroSide'];
 
 nRows = 5;
 nCols = 3;
 subind = [1:15];
 
 Id = 0;		% latest test
+Id = 50;		% rectangle levelset
+Id = 60;		% rectangle levelset, zeroside
 %% Load data {{{
 [folderList, titleList] = getFolderList(Id, 0);
 % Load simulations from levelsetSolutions.mat
