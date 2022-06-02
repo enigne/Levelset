@@ -9,7 +9,8 @@ finalTime = 50;
 
 Id = 0; % Latest experiments
 Id = 20; % v=0 on the sides
-Id = 30; % v=0 on the sides
+Id = 30; % 
+Id = 40; % v=0 on the sides
 %% Load data {{{
 addpath([projPath, '/PostProcessing/']);
 [folderList, nameList] = getFolderList(Id, 0);
