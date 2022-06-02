@@ -414,7 +414,67 @@ function varargout=runme(varargin)
 			system(['mv ', projPath, '/Models/Model_', glacier, '_', org.steps(org.currentstep).string, '.mat ', projPath, '/Models/', savePath, '/Model_', glacier, '_Transient.mat']);
 		end
 	end%}}}
-	if perform(org, 'Transient_AdRe_rectangle')% {{{
+	if perform(org, 'Transient_AdRe_rectangle_all')% {{{
+
+		md=loadmodel(org, 'Transient_Prep');
+
+		% set time
+		md.timestepping.start_time = 0;
+		md.timestepping.final_time = 2*finalTime;
+		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
+
+		% set ice mask
+		md.mask.ice_levelset = reinitializelevelset(md, setRectangleLevelset(md.mesh.x, md.mesh.y, cx, cy, radius));
+
+		% set stabilization
+		md.levelset.stabilization = levelsetStabilization;
+		disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
+		md.levelset.reinit_frequency = levelsetReinit;
+		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
+
+		% compute analytical solutions
+		time = [dt:dt:finalTime];
+		cxt = time.*vx + cx;
+		cyt = time.*vy + cy;
+		analytical_levelset_ad = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		% analytial solutions
+      cxt = fliplr(cxt);
+      analytical_levelset_re = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		md.results.analyticalSolution = [analytical_levelset_ad, analytical_levelset_re];
+
+		% prepare the initial condition
+		timepoints = [md.timestepping.start_time, finalTime, finalTime+dt, md.timestepping.final_time];
+		interpinit = [ones(md.mesh.numberofvertices+1, 2), -ones(md.mesh.numberofvertices+1, 2)];
+
+		md.initialization.vx = vx*interpinit;
+		md.initialization.vy = vy*interpinit;
+
+		md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
+		md.initialization.vx(end,:) = timepoints;
+		md.initialization.vy(end,:) = timepoints;
+		md.initialization.vel(end,:) = timepoints;
+
+		disp(['  ==== Start to solve '])
+
+		%solve
+		md.miscellaneous.name = [savePath];
+		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
+		md.cluster = cluster;
+		md.settings.waitonlock = waitonlock; % do not wait for complete
+		md.verbose.solution = 0;
+
+		% Advance run
+		md=solve(md,'tr');
+		
+		savemodel(org,md);
+		if ~strcmp(savePath, './')
+			system(['mkdir -p ', projPath, '/Models/', savePath]);
+			system(['mv ', projPath, '/Models/Model_', glacier, '_', org.steps(org.currentstep).string, '.mat ', projPath, '/Models/', savePath, '/Model_', glacier, '_Transient.mat']);
+		end
+	end%}}}
+
+	%%%%%% Step 11--20
+	if perform(org, 'Transient_AdRe_rectangle_zeroSide')% {{{
 
 		md=loadmodel(org, 'Transient_Prep');
 
@@ -464,7 +524,7 @@ function varargout=runme(varargin)
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
 		md.cluster = cluster;
 		md.settings.waitonlock = waitonlock; % do not wait for complete
-		md.verbose.solution = 1;
+		md.verbose.solution = 0;
 
 		% Advance run
 		md=solve(md,'tr');
