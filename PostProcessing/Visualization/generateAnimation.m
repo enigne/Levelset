@@ -6,7 +6,7 @@ projPath = ['/totten_1/chenggong/', glacier, '/'];
 addpath([projPath, '/PostProcessing/']);
 
 movieFlag = 1;
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_10km'];
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_zeroSide_10km'];
 
 nRows = 5;
 nCols = 3;
@@ -14,7 +14,13 @@ subind = [1:15];
 
 Id = 0;		% latest test
 Id = 101;   % 10km rect
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_10km'];
 %Id = 111;   % 10km rect, side zero
+%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_zeroSide_10km'];
+%Id = 121;   % 10km circle
+%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_10km'];
+%Id = 131;   % 10km circle, side zero
+%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_zeroSide_10km'];
 %% Load data {{{
 [folderList, titleList] = getFolderList(Id, 0);
 % Load simulations from levelsetSolutions.mat
@@ -35,8 +41,8 @@ if movieFlag
 	Nt = length(time);
 	Ndata = length(outSol);
 	nframes = floor(Nt/nstep);
-	xl = [0.2, 1]*1e6;
-	yl = [0.1,0.9]*1e6;
+	xl = [0.2, 1]*2e4;
+	yl = [0.1,0.9]*2e4;
 
 	clear mov;
 	close all;
