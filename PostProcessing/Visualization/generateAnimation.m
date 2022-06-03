@@ -6,21 +6,21 @@ projPath = ['/totten_1/chenggong/', glacier, '/'];
 addpath([projPath, '/PostProcessing/']);
 
 movieFlag = 1;
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_05T_rect'];
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_10km'];
 
 nRows = 5;
 nCols = 3;
 subind = [1:15];
 
 Id = 0;		% latest test
-Id = 50;		% rectangle levelset
-%Id = 60;		% rectangle levelset, zeroside
+Id = 101;   % 10km rect
+%Id = 111;   % 10km rect, side zero
 %% Load data {{{
 [folderList, titleList] = getFolderList(Id, 0);
 % Load simulations from levelsetSolutions.mat
 outSol = loadData(folderList, 'levelset', [projPath, 'Models/']);
 % load model
-md = loadRefMd([projPath, 'Models/'], 'Param_large');
+md = loadRefMd([projPath, 'Models/'], 'Param');
 %}}}
 %% Get all the levelsets {{{
 icemask = cellfun(@(x)sign(x.ice_levelset), {outSol{:}}, 'UniformOutput', 0);

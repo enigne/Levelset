@@ -5,14 +5,13 @@ glacier = 'Levelset';
 projPath = ['/totten_1/chenggong/', glacier, '/'];
 figNamePrefix = [projPath, 'PostProcessing/Figures/test_'];
 
-finalTime = 50;
+finalTime = 5;
 
 Id = 0; % Latest experiments
-Id = 20; % v=0 on the sides
-Id = 30; % 
-Id = 40; % v=0 on the sides
-Id = 51; % rectangle levelset function
-Id = 61; % rectangle levelset function, zero side
+Id = 102; % 10km rect
+Id = 112; % 10km rect, side zero
+Id = 122; % 10km circle
+Id = 132; % 10km circle, side zero
 %% Load data {{{
 addpath([projPath, '/PostProcessing/']);
 [folderList, nameList] = getFolderList(Id, 0);
@@ -57,12 +56,12 @@ ylim([0, 400])
 subplot(nsub, 1, 3);
 title('total misfit area (km^2)')
 xlim([0, finalTime])
-ylim([-1e4, 1e4])
+ylim([-4, 4])
 
 subplot(nsub, 1, 4);
 title('total abs misfit area (km^2)')
 xlim([0, finalTime])
-ylim([0, 1e4])
+ylim([0, 4])
 
 legend(nameList, 'Interpreter', 'latex', 'Location', 'best')
 set(gcf,'color','w');
