@@ -11,16 +11,16 @@ function varargout=runme(varargin)
 	%GET cluster name: 'totten'{{{
 	clustername = getfieldvalue(options,'cluster name','totten');
 	% }}}
-	%GET size of the domain: 1e6x1e6{{{
-	Lx = getfieldvalue(options,'Lx',1e6);
-	Ly = getfieldvalue(options,'Ly',Lx);
+	%GET size of the domain: 20e3x20e3, the width of the fjord=10km{{{
+	Lx = getfieldvalue(options,'Lx', 20e3);
+	Ly = getfieldvalue(options,'Ly', Lx);
 	% }}}
 	%GET number of elements: 200x200{{{
 	nx = getfieldvalue(options,'nx',200);
 	ny = getfieldvalue(options,'ny',nx);
 	% }}}
-	%GET constant velocity fielld: (7500, 0){{{
-	vx = getfieldvalue(options,'vx', 7500);
+	%GET constant velocity fielld: (1500, 0){{{
+	vx = getfieldvalue(options,'vx', 1500);
 	vy = getfieldvalue(options,'vy', 0);
 	% }}}
 	%GET radius of the circle: min(Lx,Ly)/4 {{{
@@ -37,10 +37,10 @@ function varargout=runme(varargin)
 	savePath = getfieldvalue(options,'savePath', '/');
 	% }}}
 	%GET dt: 0.25{{{
-	dt = getfieldvalue(options,'dt', 0.25);
+	dt = getfieldvalue(options,'dt', 0.025);
 	% }}}
-	%GET finalTime: 50{{{
-	finalTime = getfieldvalue(options,'finalTime', 50);
+	%GET finalTime: 5{{{
+	finalTime = getfieldvalue(options,'finalTime', 2.5);
 	% }}}
 	%GET jobTime for running on supercomputer: 2 hours{{{
 	jobTime = getfieldvalue(options,'jobTime', 2);
@@ -345,7 +345,7 @@ function varargout=runme(varargin)
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
 		md.cluster = cluster;
 		md.settings.waitonlock = waitonlock; % do not wait for complete
-		md.verbose.solution = 1;
+		md.verbose.solution = 0;
 
 		% Advance run
 		md=solve(md,'tr');
@@ -403,7 +403,7 @@ function varargout=runme(varargin)
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
 		md.cluster = cluster;
 		md.settings.waitonlock = waitonlock; % do not wait for complete
-		md.verbose.solution = 1;
+		md.verbose.solution = 0;
 
 		% Advance run
 		md=solve(md,'tr');

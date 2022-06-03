@@ -6,7 +6,7 @@ projPath = ['/totten_1/chenggong/', glacier, '/'];
 addpath([projPath, '/PostProcessing/']);
 
 movieFlag = 1;
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_05T_rect_zeroSide'];
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_05T_rect'];
 
 nRows = 5;
 nCols = 3;
@@ -14,13 +14,13 @@ subind = [1:15];
 
 Id = 0;		% latest test
 Id = 50;		% rectangle levelset
-Id = 60;		% rectangle levelset, zeroside
+%Id = 60;		% rectangle levelset, zeroside
 %% Load data {{{
 [folderList, titleList] = getFolderList(Id, 0);
 % Load simulations from levelsetSolutions.mat
 outSol = loadData(folderList, 'levelset', [projPath, 'Models/']);
 % load model
-md = loadRefMd();
+md = loadRefMd([projPath, 'Models/'], 'Param_large');
 %}}}
 %% Get all the levelsets {{{
 icemask = cellfun(@(x)sign(x.ice_levelset), {outSol{:}}, 'UniformOutput', 0);
@@ -40,7 +40,7 @@ if movieFlag
 
 	clear mov;
 	close all;
-	figure('position',[0,500,1000,1200])
+	figure('position',[0,500,1000,1500])
 	mov(1:nframes) = struct('cdata', [],'colormap', []);
 	count = 1;
 	for i = 1:nstep:Nt
