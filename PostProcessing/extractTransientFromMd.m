@@ -1,21 +1,49 @@
-function extractTransientFromMd(md, projPath, folder, dataName, saveflag)
+function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 
+	if isempty(mdref)
+		compareToFine = 0;
+	else 
+		compareToFine = 1;
+	end
 	%% extract time dependent solutions {{{
 	% output 
 	disp(['==== Start to process on ', folder]);
 	name = dataName;
 	time = cell2mat({md.results.TransientSolution(:).time});
 	ice_levelset = cell2mat({md.results.TransientSolution(:).MaskIceLevelset});
+	cxt = md.results.analyticalSettings.cxt;
+	cyt = md.results.analyticalSettings.cyt;
+	radius = md.results.analyticalSettings.radius;
+	domain = md.results.analyticalSettings.domain;
 	analytical_levelset = md.results.analyticalSolution;
 	disp(['======> Finish data extraction ', folder]);
 
+	% recompute analytical solution if use finer mesh
+	if compareToFine 
+		disp(['======> Project solution to a finer mesh with ', num2str(mdref.mesh.numberofelements), ' elements']);
+		numerical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,ice_levelset,mdref.mesh.x, mdref.mesh.y);
+		if strcmp(domain,'rectangle')
+			analytical_sol = setRectangleLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
+		else
+			analytical_sol = setLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
+		end
+	else
+		numerical_sol = ice_levelset;
+		analytical_sol = analytical_levelset;
+	end
+
 	disp(['======> Calculate the misfit of the two sign functions']);
-	misfit = sign(analytical_levelset) - sign(ice_levelset);
+	misfit = sign(analytical_sol) - sign(numerical_sol);
 	sum_misfit = sum(misfit, 1);
 	sum_abs_misfit = sum(abs(misfit), 1);
 
-	[total_misfit, ~, ~] =integrateOverDomain(md, misfit);
-	[total_abs_misfit, ~, ~] =integrateOverDomain(md, abs(misfit));
+	if compareToFine
+		[total_misfit, ~, ~] =integrateOverDomain(mdref, misfit);
+		[total_abs_misfit, ~, ~] =integrateOverDomain(mdref, abs(misfit));
+	else
+		[total_misfit, ~, ~] =integrateOverDomain(md, misfit);
+		[total_abs_misfit, ~, ~] =integrateOverDomain(md, abs(misfit));
+	end
 
 	disp(['======> Finish the misfit: ']);
 	disp(['          total misfit: ', num2str(min(total_misfit)), ' -- '  num2str(max(total_misfit))]);

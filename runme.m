@@ -321,11 +321,15 @@ function varargout=runme(varargin)
 		time = [dt:dt:finalTime];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
-		analytical_levelset_ad = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 		% analytial solutions
-      cxt = fliplr(cxt);
-      analytical_levelset_re = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
-		md.results.analyticalSolution = [analytical_levelset_ad, analytical_levelset_re];
+      cxt = [cxt, fliplr(cxt)];
+      cyt = [cyt, cyt];
+      md.results.analyticalSolution = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+      % save analytical settings
+		md.results.analyticalSettings.cxt =cxt;
+		md.results.analyticalSettings.cyt =cyt;
+		md.results.analyticalSettings.radius = radius;
+		md.results.analyticalSettings.domain = 'Semicircle';
 
 		% prepare the initial condition
 		timepoints = [md.timestepping.start_time, finalTime, finalTime+dt, md.timestepping.final_time];
@@ -375,11 +379,15 @@ function varargout=runme(varargin)
 		time = [dt:dt:finalTime];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
-		analytical_levelset_ad = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 		% analytial solutions
-      cxt = fliplr(cxt);
-      analytical_levelset_re = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
-		md.results.analyticalSolution = [analytical_levelset_ad, analytical_levelset_re];
+      cxt = [cxt, fliplr(cxt)];
+		cyt = [cyt, cyt];
+		md.results.analyticalSolution = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		% save analytical settings
+		md.results.analyticalSettings.cxt =cxt;
+		md.results.analyticalSettings.cyt =cyt;
+		md.results.analyticalSettings.radius = radius;
+		md.results.analyticalSettings.domain = 'Semicircle';
 
 		% prepare the initial condition
 		timepoints = [md.timestepping.start_time, finalTime, finalTime+dt, md.timestepping.final_time];
@@ -436,11 +444,15 @@ function varargout=runme(varargin)
 		time = [dt:dt:finalTime];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
-		analytical_levelset_ad = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 		% analytial solutions
-      cxt = fliplr(cxt);
-      analytical_levelset_re = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
-		md.results.analyticalSolution = [analytical_levelset_ad, analytical_levelset_re];
+		cxt = [cxt, fliplr(cxt)];
+      cyt = [cyt, cyt];
+      md.results.analyticalSolution = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+      % save analytical settings
+		md.results.analyticalSettings.cxt =cxt;
+		md.results.analyticalSettings.cyt =cyt;
+		md.results.analyticalSettings.radius = radius;
+		md.results.analyticalSettings.domain = 'rectangle';
 
 		% prepare the initial condition
 		timepoints = [md.timestepping.start_time, finalTime, finalTime+dt, md.timestepping.final_time];
@@ -496,11 +508,16 @@ function varargout=runme(varargin)
 		time = [dt:dt:finalTime];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
-		analytical_levelset_ad = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 		% analytial solutions
-      cxt = fliplr(cxt);
-      analytical_levelset_re = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
-		md.results.analyticalSolution = [analytical_levelset_ad, analytical_levelset_re];
+		cxt = [cxt, fliplr(cxt)];
+		cyt = [cyt, cyt];
+		md.results.analyticalSolution = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		% save analytical settings
+		md.results.analyticalSettings.cxt =cxt;
+		md.results.analyticalSettings.cyt =cyt;
+		md.results.analyticalSettings.radius = radius;
+		md.results.analyticalSettings.domain = 'rectangle';
+
 
 		% prepare the initial condition
 		timepoints = [md.timestepping.start_time, finalTime, finalTime+dt, md.timestepping.final_time];
@@ -535,5 +552,9 @@ function varargout=runme(varargin)
 			system(['mv ', projPath, '/Models/Model_', glacier, '_', org.steps(org.currentstep).string, '.mat ', projPath, '/Models/', savePath, '/Model_', glacier, '_Transient.mat']);
 		end
 	end%}}}
+	if perform(org, 'SuperfineMesh')% {{{
+		md=squaremesh(model(), Lx, Ly, nx*10, ny*10);
+		savemodel(org,md);
+	end %}}}
 	varargout{1} = md;
 	return;
