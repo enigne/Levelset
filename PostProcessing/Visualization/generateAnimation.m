@@ -14,11 +14,11 @@ subind = [1:15];
 
 Id = 0;		% latest test
 Id = 101;   % 10km rect
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_10km'];
-%Id = 111;   % 10km rect, side zero
-%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_zeroSide_10km'];
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_10km_refine'];
+Id = 111;   % 10km rect, side zero
+movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_zeroSide_10km_refine'];
 %Id = 121;   % 10km circle
-%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_10km'];
+%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_10km_refine'];
 %Id = 131;   % 10km circle, side zero
 %movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_zeroSide_10km'];
 %% Load data {{{
@@ -35,7 +35,7 @@ time = outSol{1}.time;
 %}}}
 %% Create Movie for friction and ice rheology {{{
 if movieFlag
-	nstep = 4;
+	nstep = 1;
 
 	set(0,'defaultfigurecolor',[1, 1, 1])
 	Nt = length(time);
