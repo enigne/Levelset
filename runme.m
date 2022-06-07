@@ -212,10 +212,10 @@ function varargout=runme(varargin)
 		disp(['  ==== Start to run retreat '])
 		% Retreat run
 		md=solve(md,'tr');
-		
+
 		% analytial solutions
-      cxt = fliplr(cxt);
-      analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		cxt = fliplr(cxt);
+		analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 
 		% append the retreat solution to the advance
 		md.results.TransientSolution = [advanceSolutions, md.results.TransientSolution];
@@ -236,9 +236,9 @@ function varargout=runme(varargin)
 
 		% set velocity
 		md.initialization.vx = vx*ones(md.mesh.numberofvertices, 1);
-      md.initialization.vy = vy*ones(md.mesh.numberofvertices, 1);
+		md.initialization.vy = vy*ones(md.mesh.numberofvertices, 1);
 		md.initialization.vx(pos) = 0;
-      md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
+		md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
 
 		% set time
 		md.timestepping.start_time = 0;
@@ -287,10 +287,10 @@ function varargout=runme(varargin)
 		disp(['  ==== Start to run retreat '])
 		% Retreat run
 		md=solve(md,'tr');
-		
+
 		% analytial solutions
-      cxt = fliplr(cxt);
-      analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		cxt = fliplr(cxt);
+		analytical_levelset = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 
 		% append the retreat solution to the advance
 		md.results.TransientSolution = [advanceSolutions, md.results.TransientSolution];
@@ -318,14 +318,12 @@ function varargout=runme(varargin)
 		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
 		% compute analytical solutions
-		time = [dt:dt:finalTime];
+		time = [dt:dt:finalTime, finalTime-dt:-dt:0];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
 		% analytial solutions
-      cxt = [cxt, fliplr(cxt)];
-      cyt = [cyt, cyt];
-      md.results.analyticalSolution = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
-      % save analytical settings
+		md.results.analyticalSolution = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		% save analytical settings
 		md.results.analyticalSettings.cxt =cxt;
 		md.results.analyticalSettings.cyt =cyt;
 		md.results.analyticalSettings.radius = radius;
@@ -353,7 +351,7 @@ function varargout=runme(varargin)
 
 		% Advance run
 		md=solve(md,'tr');
-		
+
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
 			system(['mkdir -p ', projPath, '/Models/', savePath]);
@@ -376,12 +374,10 @@ function varargout=runme(varargin)
 		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
 		% compute analytical solutions
-		time = [dt:dt:finalTime];
+		time = [dt:dt:finalTime, finalTime-dt:-dt:0];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
 		% analytial solutions
-      cxt = [cxt, fliplr(cxt)];
-		cyt = [cyt, cyt];
 		md.results.analyticalSolution = setLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 		% save analytical settings
 		md.results.analyticalSettings.cxt =cxt;
@@ -396,8 +392,8 @@ function varargout=runme(varargin)
 		md.initialization.vx = vx*interpinit;
 		md.initialization.vy = vy*interpinit;
 		% remove the side
-      pos = (md.mesh.y >= cy+radius) | (md.mesh.y <= cy - radius);
-      md.initialization.vx(pos,:) = 0;
+		pos = (md.mesh.y >= cy+radius) | (md.mesh.y <= cy - radius);
+		md.initialization.vx(pos,:) = 0;
 
 		md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
 		md.initialization.vx(end,:) = timepoints;
@@ -415,7 +411,7 @@ function varargout=runme(varargin)
 
 		% Advance run
 		md=solve(md,'tr');
-		
+
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
 			system(['mkdir -p ', projPath, '/Models/', savePath]);
@@ -441,14 +437,12 @@ function varargout=runme(varargin)
 		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
 		% compute analytical solutions
-		time = [dt:dt:finalTime];
+		time = [dt:dt:finalTime, finalTime-dt:-dt:0];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
 		% analytial solutions
-		cxt = [cxt, fliplr(cxt)];
-      cyt = [cyt, cyt];
-      md.results.analyticalSolution = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
-      % save analytical settings
+		md.results.analyticalSolution = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
+		% save analytical settings
 		md.results.analyticalSettings.cxt =cxt;
 		md.results.analyticalSettings.cyt =cyt;
 		md.results.analyticalSettings.radius = radius;
@@ -477,7 +471,7 @@ function varargout=runme(varargin)
 
 		% Advance run
 		md=solve(md,'tr');
-		
+
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
 			system(['mkdir -p ', projPath, '/Models/', savePath]);
@@ -505,12 +499,10 @@ function varargout=runme(varargin)
 		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
 		% compute analytical solutions
-		time = [dt:dt:finalTime];
+		time = [dt:dt:finalTime, finalTime-dt:-dt:0];
 		cxt = time.*vx + cx;
 		cyt = time.*vy + cy;
 		% analytial solutions
-		cxt = [cxt, fliplr(cxt)];
-		cyt = [cyt, cyt];
 		md.results.analyticalSolution = setRectangleLevelset(md.mesh.x, md.mesh.y, cxt, cyt, radius);
 		% save analytical settings
 		md.results.analyticalSettings.cxt =cxt;
@@ -526,8 +518,8 @@ function varargout=runme(varargin)
 		md.initialization.vx = vx*interpinit;
 		md.initialization.vy = vy*interpinit;
 		% remove the side
-      pos = (md.mesh.y >= cy+radius) | (md.mesh.y <= cy - radius);
-      md.initialization.vx(pos,:) = 0;
+		pos = (md.mesh.y >= cy+radius) | (md.mesh.y <= cy - radius);
+		md.initialization.vx(pos,:) = 0;
 
 		md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
 		md.initialization.vx(end,:) = timepoints;
@@ -545,7 +537,7 @@ function varargout=runme(varargin)
 
 		% Advance run
 		md=solve(md,'tr');
-		
+
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
 			system(['mkdir -p ', projPath, '/Models/', savePath]);
