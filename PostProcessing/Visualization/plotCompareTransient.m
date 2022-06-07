@@ -9,9 +9,9 @@ finalTime = 5;
 
 Id = 0; % Latest experiments
 Id = 102; % 10km rect
-Id = 112; % 10km rect, side zero
-Id = 122; % 10km circle
-Id = 132; % 10km circle, side zero
+%Id = 112; % 10km rect, side zero
+%Id = 122; % 10km circle
+%Id = 132; % 10km circle, side zero
 %% Load data {{{
 addpath([projPath, '/PostProcessing/']);
 [folderList, nameList] = getFolderList(Id, 0);
