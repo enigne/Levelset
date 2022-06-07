@@ -1,42 +1,52 @@
 % Generate animations 
-clear
-close all
-glacier = 'Levelset';
-projPath = ['/totten_1/chenggong/', glacier, '/'];
-addpath([projPath, '/PostProcessing/']);
+function generateAnimation(varargin)
 
-movieFlag = 1;
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_zeroSide_10km'];
+	%Check inputs {{{
+	%recover options
+	options=pairoptions(varargin{:});
+	% }}}
+	%GET glacier: 'Levelset'{{{
+	glacier = getfieldvalue(options,'glacier', 'Levelset');
+	% }}}
+	%GET home dirctory: '/totten_1/chenggong/'{{{
+	homeDir = getfieldvalue(options,'home directory', '/totten_1/chenggong/');
+	projPath = [homeDir, glacier, '/'];
+	addpath([projPath, '/PostProcessing/']);
+	% }}}
+	%GET Id : 0{{{
+	Id = getfieldvalue(options,'Id', 0);
+	% }}}
+	%GET movie name : ''{{{
+	movieSuffix = getfieldvalue(options,'movie name', '');
+	movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_', movieSuffix];
+	% }}}
+	%GET nRows : 1{{{
+	nRows = getfieldvalue(options,'nRows', 1);
+	% }}}
+	%GET nCols : 1{{{
+	nCols = getfieldvalue(options,'nCols', 1);
+	% }}}
+	%GET index : [1]{{{
+	subind = getfieldvalue(options,'index', [1]);
+	% }}}
+	%GET frame step : 2 {{{
+	nstep = getfieldvalue(options,'frame step', 2);
+	% }}}
 
-nRows = 5;
-nCols = 3;
-subind = [1:15];
 
-Id = 0;		% latest test
-Id = 101;   % 10km rect
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_10km_refine'];
-Id = 111;   % 10km rect, side zero
-movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_rect_zeroSide_10km_refine'];
-%Id = 121;   % 10km circle
-%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_10km_refine'];
-%Id = 131;   % 10km circle, side zero
-%movieName = [projPath, 'PostProcessing/Figures/Animations/', glacier, '_stabtest_circle_zeroSide_10km'];
-%% Load data {{{
-[folderList, titleList] = getFolderList(Id, 0);
-% Load simulations from levelsetSolutions.mat
-outSol = loadData(folderList, 'levelset', [projPath, 'Models/']);
-% load model
-md = loadRefMd([projPath, 'Models/'], 'Param');
-%}}}
-%% Get all the levelsets {{{
-icemask = cellfun(@(x)sign(x.ice_levelset), {outSol{:}}, 'UniformOutput', 0);
-anamask = cellfun(@(x)x.analytical_levelset, {outSol{:}}, 'UniformOutput', 0);
-time = outSol{1}.time;
-%}}}
-%% Create Movie for friction and ice rheology {{{
-if movieFlag
-	nstep = 1;
-
+	%% Load data {{{
+	[folderList, titleList] = getFolderList(Id, 0);
+	% Load simulations from levelsetSolutions.mat
+	outSol = loadData(folderList, 'levelset', [projPath, 'Models/']);
+	% load model
+	md = loadRefMd([projPath, 'Models/'], 'Param');
+	%}}}
+	%% Get all the levelsets {{{
+	icemask = cellfun(@(x)sign(x.ice_levelset), {outSol{:}}, 'UniformOutput', 0);
+	anamask = cellfun(@(x)x.analytical_levelset, {outSol{:}}, 'UniformOutput', 0);
+	time = outSol{1}.time;
+	%}}}
+	%% Create Movie for friction and ice rheology {{{
 	set(0,'defaultfigurecolor',[1, 1, 1])
 	Nt = length(time);
 	Ndata = length(outSol);
@@ -95,6 +105,5 @@ if movieFlag
 	close(writerObj);
 	command=sprintf('ffmpeg -y -i %s.avi -c:v libx264 -crf 19 -preset slow -c:a libfaac -b:a 192k -ac 2 -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" %s.mp4',movieName,movieName);
 	system(command);
-end
-%}}}
+	%}}}
 
