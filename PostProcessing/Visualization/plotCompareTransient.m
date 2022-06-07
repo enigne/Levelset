@@ -3,15 +3,17 @@ close all
 
 glacier = 'Levelset';
 projPath = ['/totten_1/chenggong/', glacier, '/'];
-figNamePrefix = [projPath, 'PostProcessing/Figures/test_'];
+figNamePrefix = [projPath, 'PostProcessing/Figures/'];
+saveflag = 1;
+figName = [figNamePrefix, 'semicircle_side0'];
 
 finalTime = 5;
 
 Id = 0; % Latest experiments
 Id = 102; % 10km rect
-%Id = 112; % 10km rect, side zero
-%Id = 122; % 10km circle
-%Id = 132; % 10km circle, side zero
+Id = 112; % 10km rect, side zero
+Id = 122; % 10km circle
+Id = 132; % 10km circle, side zero
 %% Load data {{{
 addpath([projPath, '/PostProcessing/']);
 [folderList, nameList] = getFolderList(Id, 0);
@@ -47,4 +49,7 @@ ylim([0, 4])
 
 legend(nameList, 'Interpreter', 'latex', 'Location', 'best')
 set(gcf,'color','w');
+if saveflag
+	export_fig([figName, '.pdf'])
+end
 %}}}

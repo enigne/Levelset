@@ -16,5 +16,5 @@ Id = 121;   % 10km circle
 movieName = 'stabtest_circle_10km_refine';
 generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
 Id = 131;   % 10km circle, side zero
-movieName = 'stabtest_circle_zeroSide_10km';
+movieName = 'stabtest_circle_zeroSide_10km_refine';
 generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
