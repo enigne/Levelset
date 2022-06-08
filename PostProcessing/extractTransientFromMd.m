@@ -27,6 +27,9 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		else
 			analytical_sol = setLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
 		end
+		% project back to analytical levelset, for a better ploting
+		disp(['======> Project analytical solution from finer mesh to the computational mesh']);
+		analytical_levelset = InterpFromMeshToMesh2d(mdref.mesh.elements, mdref.mesh.x, mdref.mesh.y, analytical_sol, md.mesh.x, md.mesh.y);
 	else
 		numerical_sol = ice_levelset;
 		analytical_sol = analytical_levelset;

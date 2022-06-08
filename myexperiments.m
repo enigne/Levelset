@@ -9,7 +9,7 @@ reinit = [0, 1, 10, 50, 100];
 stablization = [1,2,5];
 
 
-steps = [8];
+steps = [6];
 for i = 1:length(reinit)
 	for l = 1:length(stablization)
 		savePath = [today, '_LevelsetTest_circle', '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
@@ -21,7 +21,7 @@ for i = 1:length(reinit)
 	end
 end
 
-steps = [9];
+steps = [7];
 for i = 1:length(reinit)
 	for l = 1:length(stablization)
 		savePath = [today, '_LevelsetTest_circle_zeroSide', '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
@@ -33,7 +33,7 @@ for i = 1:length(reinit)
 	end
 end
 
-steps = [10];
+steps = [8];
 for i = 1:length(reinit)
 	for l = 1:length(stablization)
 		savePath = [today, '_LevelsetTest_rect', '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
@@ -45,7 +45,7 @@ for i = 1:length(reinit)
 	end
 end
 
-steps = [11];
+steps = [9];
 for i = 1:length(reinit)
 	for l = 1:length(stablization)
 		savePath = [today, '_LevelsetTest_rect_zeroSide', '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
