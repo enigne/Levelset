@@ -9,6 +9,9 @@ saveflag = 1;
 finalTime = 5;
 Ids = [102, 112, 122, 132];
 figs = {'rectangle', 'rectangle_side0', 'semicircle', 'semicircle_side0'};
+linestyles = {'-', ':'};
+colorstyle = {'#0072BD', '#D95319', '#EDB120'};
+Nlines = 2;
 % start the loop {{{
 for iid = 1:length(Ids)
 	Id = Ids(iid);
@@ -29,11 +32,11 @@ for iid = 1:length(Ids)
 		time = transData{i}.time;
 		% number of misfit elements no abs
 		subplot(nsub,1,1)
-		plot(transData{i}.time, transData{i}.total_misfit/1e6, 'LineWidth', 2);
+		plot(transData{i}.time, transData{i}.total_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{mod((i-1), Nlines)+1},'Color', colorstyle{fix((i-1)/ Nlines)+1});
 		hold on
 
 		subplot(nsub,1,2)
-		plot(transData{i}.time, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2);
+		plot(transData{i}.time, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{mod((i-1), Nlines)+1},'Color', colorstyle{fix((i-1)/ Nlines)+1});
 		hold on
 	end
 	subplot(nsub, 1, 1);
@@ -50,7 +53,7 @@ for iid = 1:length(Ids)
 	xlabel('Time (a)')
 	ylabel('Misfit area (km$^2$)', 'Interpreter', 'latex')
 
-%	legend(nameList, 'Interpreter', 'latex', 'Location', 'best')
+%	legend(nameList, 'Interpreter', 'latex','Orientation','horizontal','Location','bestoutside')
 	set(gcf,'color','w');
 	if saveflag
 		export_fig([figName, '.pdf'])
