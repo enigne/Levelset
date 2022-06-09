@@ -2,11 +2,10 @@ clear
 close all
 
 today = datestr(date(), 'yyyymmdd');
-today = '20220603'
 
 finalTime = 2.5;
-reinit = [0, 1, 10, 50, 100];
-stablization = [1,2,5];
+reinit = [0, 1, 10, 100];
+stablization = [6];
 
 
 steps = [6];
