@@ -2,7 +2,7 @@ clear
 close all
 
 glacier = 'Levelset';
-compareToFine = 1;
+compareToFine = 0;
 Id = 0;
 % Setting {{{ 
 stepName = 'Transient';

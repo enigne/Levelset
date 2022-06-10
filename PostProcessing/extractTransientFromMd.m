@@ -5,31 +5,51 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 	else 
 		compareToFine = 1;
 	end
+	hasAnalytical = 0;
 	%% extract time dependent solutions {{{
 	% output 
 	disp(['==== Start to process on ', folder]);
 	name = dataName;
 	time = cell2mat({md.results.TransientSolution(:).time});
 	ice_levelset = cell2mat({md.results.TransientSolution(:).MaskIceLevelset});
-	cxt = md.results.analyticalSettings.cxt;
-	cyt = md.results.analyticalSettings.cyt;
-	radius = md.results.analyticalSettings.radius;
-	domain = md.results.analyticalSettings.domain;
-	analytical_levelset = md.results.analyticalSolution;
+	% analytical solutions
+	if isfield(md.results, 'analyticalSolution')
+		hasAnalytical = 1;
+		disp(['======> Found analytical soutions for ', folder]);
+		cxt = md.results.analyticalSettings.cxt;
+		cyt = md.results.analyticalSettings.cyt;
+		radius = md.results.analyticalSettings.radius;
+		domain = md.results.analyticalSettings.domain;
+		analytical_levelset = md.results.analyticalSolution;
+	else
+		hasAnalytical = 0;
+		% use the first round solution of advance phase as the reference solution
+		% TODO: make the choice of repeatNt and T automatic
+		repeatNt = 10;
+		NT = ceil(length(time)/repeatNt/2);
+		reflevelset = [ice_levelset(:, 1:NT), fliplr(ice_levelset(:,1:NT-1)), md.mask.ice_levelset]; 
+		analytical_levelset = repmat(reflevelset, 1, repeatNt);
+	end
 	disp(['======> Finish data extraction ', folder]);
 
 	% recompute analytical solution if use finer mesh
 	if compareToFine 
 		disp(['======> Project solution to a finer mesh with ', num2str(mdref.mesh.numberofelements), ' elements']);
 		numerical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,ice_levelset,mdref.mesh.x, mdref.mesh.y);
-		if strcmp(domain,'rectangle')
-			analytical_sol = setRectangleLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
+
+		if hasAnalytical
+			if strcmp(domain,'rectangle')
+				analytical_sol = setRectangleLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
+			else
+				analytical_sol = setLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
+			end
+			% project back to analytical levelset, for a better ploting
+			disp(['======> Project analytical solution from finer mesh to the computational mesh']);
+			analytical_levelset = InterpFromMeshToMesh2d(mdref.mesh.elements, mdref.mesh.x, mdref.mesh.y, analytical_sol, md.mesh.x, md.mesh.y);
 		else
-			analytical_sol = setLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
+			disp(['======> Project reference solution to a finer mesh']);
+			analytical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,analytical_levelset,mdref.mesh.x, mdref.mesh.y);
 		end
-		% project back to analytical levelset, for a better ploting
-		disp(['======> Project analytical solution from finer mesh to the computational mesh']);
-		analytical_levelset = InterpFromMeshToMesh2d(mdref.mesh.elements, mdref.mesh.x, mdref.mesh.y, analytical_sol, md.mesh.x, md.mesh.y);
 	else
 		numerical_sol = ice_levelset;
 		analytical_sol = analytical_levelset;
