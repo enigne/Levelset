@@ -23,10 +23,10 @@ for iid = 1:length(Ids)
 	% Load simulations from transient.mat
 	transData = loadData(folderList, 'levelset', [projPath, 'Models/']);
 	Ntrans = length(transData);
-	nsub = 2;
 	%}}}
 	%% Average behaviors {{{
-	figure('position',[0,300,400,300])
+	figure('position',[0,600,800,600])
+	nsub = 2;
 
 	for i = 1: Ntrans
 		time = transData{i}.time;

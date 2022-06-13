@@ -33,21 +33,22 @@ subind = [1:15];
 nRows = 4;
 nCols = 3;
 subind = [1:12];
+framesteps = 10;
 Id = 202;   % circle parabola
 movieName = 'stabtest_circle_parabola';
-generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
+generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);
 Id = 203;   % circle gaussian
 movieName = 'stabtest_circle_gaussian';
-generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
+generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);
 Id = 204;   % circle triangle
 movieName = 'stabtest_circle_triangle';
-generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
+generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);
 Id = 212;   % rectangle parabola
 movieName = 'stabtest_rectangle_parabola';
-generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
+generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);
 Id = 213;   % rectangle gaussian
 movieName = 'stabtest_rectangle_gaussian';
-generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
+generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);
 Id = 214;   % rectangle triangle
 movieName = 'stabtest_rectangle_triangle';
-generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind);
+generateAnimation('Id', Id, 'movie name', movieName, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);

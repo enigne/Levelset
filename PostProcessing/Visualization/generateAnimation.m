@@ -43,7 +43,7 @@ function generateAnimation(varargin)
 	%}}}
 	%% Get all the levelsets {{{
 	icemask = cellfun(@(x)sign(x.ice_levelset), {outSol{:}}, 'UniformOutput', 0);
-	anamask = cellfun(@(x)x.analytical_levelset, {outSol{:}}, 'UniformOutput', 0);
+	anamask = cellfun(@(x)sign(x.analytical_levelset), {outSol{:}}, 'UniformOutput', 0);
 	time = outSol{1}.time;
 	%}}}
 	%% Create Movie for friction and ice rheology {{{
