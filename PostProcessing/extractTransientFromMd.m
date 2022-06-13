@@ -26,8 +26,8 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		% use the first round solution of advance phase as the reference solution
 		% TODO: make the choice of repeatNt and T automatic
 		repeatNt = 10;
-		NT = ceil(length(time)/repeatNt/2);
-		reflevelset = [ice_levelset(:, 1:NT), fliplr(ice_levelset(:,1:NT-1)), md.mask.ice_levelset]; 
+		NT = ceil(length(time)/repeatNt);
+		reflevelset = ice_levelset(:, 1:NT);
 		analytical_levelset = repmat(reflevelset, 1, repeatNt);
 	end
 	disp(['======> Finish data extraction ', folder]);
