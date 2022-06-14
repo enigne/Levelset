@@ -7,9 +7,10 @@ figNamePrefix = [projPath, 'PostProcessing/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-Ids = [202, 203, 204, 212, 213, 214];
-figs = {'circle_parabola', 'circle_gaussian', 'circle_triangle', 'rectangle_parabola', 'rectangle_gaussian', 'rectangle_triangle'};
-linestyles = {'-', ':', '-.', '--'};
+%Ids = [202, 203, 204, 212, 213, 214];
+Ids = [301, 302, 303, 304, 311, 401];
+figs = {'circle_parabola', 'circle_triangle', 'circle_gaussian', 'circle_uniform', 'circle_parabola_v5', 'rectangle_parabola'};
+linestyles = {'-', ':', '--'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120'};
 Nlines = length(colorstyle) ;
 % start the loop {{{
@@ -32,24 +33,24 @@ for iid = 1:length(Ids)
 		time = transData{i}.time;
 		% number of misfit elements no abs
 		subplot(nsub,1,1)
-		plot(transData{i}.time, transData{i}.total_misfit/1e6, 'LineWidth', 2, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
+		plot(transData{i}.time, transData{i}.total_misfit/1e6, 'LineWidth', 1, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
 		hold on
 
 		subplot(nsub,1,2)
-		plot(transData{i}.time, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
+		plot(transData{i}.time, transData{i}.total_abs_misfit/1e6, 'LineWidth', 1, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
 		hold on
 	end
 	subplot(nsub, 1, 1);
 	title('total misfit area')
 	xlim([0, finalTime])
-%	ylim([-4, 4])
+	ylim([-20, 20])
 	xlabel('Time (a)')
 	ylabel('Misfit area (km$^2$)', 'Interpreter', 'latex')
 
 	subplot(nsub, 1, 2);
 	title('total absolute misfit area')
 	xlim([0, finalTime])
-%	ylim([0, 4])
+	ylim([0, 25])
 	xlabel('Time (a)')
 	ylabel('Misfit area (km$^2$)', 'Interpreter', 'latex')
 
