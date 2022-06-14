@@ -42,13 +42,14 @@ function generateAnimation(varargin)
 	md = loadRefMd([projPath, 'Models/'], 'Param');
 	%}}}
 	%% Get all the levelsets {{{
+	time = outSol{1}.time;
+	Nt = length(time);
 	icemask = cellfun(@(x)sign(x.ice_levelset), {outSol{:}}, 'UniformOutput', 0);
 	anamask = cellfun(@(x)sign(x.analytical_levelset), {outSol{:}}, 'UniformOutput', 0);
-	time = outSol{1}.time;
+	NtoRepeat = cellfun(@(x)(ceil(Nt/x.repeatNt)), {outSol{:}}, 'UniformOutput', 0);
 	%}}}
 	%% Create Movie for friction and ice rheology {{{
 	set(0,'defaultfigurecolor',[1, 1, 1])
-	Nt = length(time);
 	Ndata = length(outSol);
 	nframes = floor(Nt/nstep);
 	xl = [0.2, 1]*2e4;
@@ -62,7 +63,7 @@ function generateAnimation(varargin)
 	for i = 1:nstep:Nt
 		for j = 1:Ndata	
 			if (i <= size(icemask{j}, 2))
-				plotmodel(md,'data', icemask{j}(:,i)-anamask{j}(:,i),...
+				plotmodel(md,'data', icemask{j}(:,i)-anamask{j}(:,mod(i-1, NtoRepeat{j})+1),...
 					'ylim', yl, 'xlim', xl,...
 					'caxis', [-2, 2], 'colorbar', 'off',...
 					'xtick', [], 'ytick', [], ...
@@ -106,4 +107,3 @@ function generateAnimation(varargin)
 	command=sprintf('ffmpeg -y -i %s.avi -c:v libx264 -crf 19 -preset slow -c:a libfaac -b:a 192k -ac 2 -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" %s.mp4',movieName,movieName);
 	system(command);
 	%}}}
-
