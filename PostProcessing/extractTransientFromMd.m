@@ -15,6 +15,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 	% analytical solutions
 	if isfield(md.results, 'analyticalSolution')
 		hasAnalytical = 1;
+		error('not updated the analytical_levelset, need to remove the duplicated data')
 		disp(['======> Found analytical soutions for ', folder]);
 		cxt = md.results.analyticalSettings.cxt;
 		cyt = md.results.analyticalSettings.cyt;
@@ -24,11 +25,9 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 	else
 		hasAnalytical = 0;
 		% use the first round solution of advance phase as the reference solution
-		% TODO: make the choice of repeatNt and T automatic
-		repeatNt = 10;
+		repeatNt = md.results.timesettings.repeatNt;
 		NT = ceil(length(time)/repeatNt);
-		reflevelset = ice_levelset(:, 1:NT);
-		analytical_levelset = repmat(reflevelset, 1, repeatNt);
+		analytical_levelset = ice_levelset(:, 1:NT);
 	end
 	disp(['======> Finish data extraction ', folder]);
 
@@ -48,11 +47,12 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 			analytical_levelset = InterpFromMeshToMesh2d(mdref.mesh.elements, mdref.mesh.x, mdref.mesh.y, analytical_sol, md.mesh.x, md.mesh.y);
 		else
 			disp(['======> Project reference solution to a finer mesh']);
-			analytical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,analytical_levelset,mdref.mesh.x, mdref.mesh.y);
+			ref_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,analytical_levelset,mdref.mesh.x, mdref.mesh.y);
+			analytical_sol = repmat(ref_sol, 1, repeatNt);
 		end
 	else
 		numerical_sol = ice_levelset;
-		analytical_sol = analytical_levelset;
+		analytical_sol = repmat(analytical_levelset, 1, repeatNt);
 	end
 
 	disp(['======> Calculate the misfit of the two sign functions']);
@@ -77,7 +77,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		savePath = [projPath, 'Models/', folder, '/'];
 		disp(['======> Saving to ', savePath]);
 		save([savePath, 'levelsetSolutions', '.mat'], 'name',...
-			'time', 'ice_levelset', 'analytical_levelset', 'total_misfit',...
+			'time', 'ice_levelset', 'analytical_levelset', 'repeatNt',  'total_misfit',...
 			'total_abs_misfit', 'sum_misfit', 'sum_abs_misfit');
 		disp(['======> Saving complete ']);
 	end

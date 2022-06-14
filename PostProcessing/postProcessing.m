@@ -2,8 +2,8 @@ clear
 close all
 
 glacier = 'Levelset';
-compareToFine = 0;
-Id = 0;
+compareToFine = 1;
+Id = -300;  % 310, 400, 410
 % Setting {{{ 
 stepName = 'Transient';
 saveflag = 1;
@@ -14,7 +14,7 @@ steps = [0];
 % Loading models {{{
 [folderList, dataNameList] = getFolderList(Id);
 Ndata = length(folderList);
-parfor i = 1:Ndata
+for i = 1:Ndata
     disp(['---- Loading the model from ', folderList{i}]);
     org{i}=organizer('repository', [projPath, 'Models/', folderList{i}], 'prefix', ['Model_' glacier '_'], 'steps', steps);
     mdList{i} = loadmodel(org{i}, [stepName]);
@@ -28,7 +28,7 @@ else
 	mdref = '';
 end%}}}
 % postProcessing {{{
-parfor i = 1:Ndata
+for i = 1:Ndata
 	extractTransientFromMd(mdList{i}, projPath, folderList{i}, dataNameList{i}, mdref, saveflag);
 end
 %}}}
