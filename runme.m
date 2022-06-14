@@ -39,7 +39,7 @@ function varargout=runme(varargin)
 	%GET savepath: '/' {{{
 	savePath = getfieldvalue(options,'savePath', '/');
 	% }}}
-	%GET dt: 0.25{{{
+	%GET dt: 0.025{{{
 	dt = getfieldvalue(options,'dt', 0.025);
 	% }}}
 	%GET finalTime: 5{{{
@@ -400,6 +400,10 @@ function varargout=runme(varargin)
 		md.timestepping.final_time = 2*finalTime*repeatNt;
 		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
 
+		% save the time settings to results
+		md.results.timesettings.finalTime = finalTime;
+		md.results.timesettings.repeatNt = repeatNt;
+
 		% set stabilization
 		md.levelset.stabilization = levelsetStabilization;
 		disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
@@ -451,7 +455,7 @@ function varargout=runme(varargin)
 		md.verbose.solution = 0;
 
 		% Advance run
-		md=solve(md,'tr');
+		md=solve(md,'Transient','runtimename',false);
 
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
@@ -470,6 +474,10 @@ function varargout=runme(varargin)
 		md.timestepping.final_time = 2*finalTime*repeatNt;
 		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
 
+		% save the time settings to results
+		md.results.timesettings.finalTime = finalTime;
+		md.results.timesettings.repeatNt = repeatNt;
+
 		% set stabilization
 		md.levelset.stabilization = levelsetStabilization;
 		disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
@@ -521,7 +529,7 @@ function varargout=runme(varargin)
 		md.verbose.solution = 0;
 
 		% Advance run
-		md=solve(md,'tr');
+		md=solve(md,'Transient','runtimename',false);
 
 		savemodel(org,md);
 		if ~strcmp(savePath, './')
