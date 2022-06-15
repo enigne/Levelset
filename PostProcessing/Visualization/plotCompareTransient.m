@@ -16,7 +16,7 @@ Nlines = length(colorstyle) ;
 % start the loop {{{
 for iid = 1:length(Ids)
 	Id = Ids(iid);
-	figName = [figNamePrefix, figs{iid}];
+	figName = [figNamePrefix, figs{iid}, '_initcomp'];
 	%% Load data {{{
 	addpath([projPath, '/PostProcessing/']);
 	[folderList, nameList] = getFolderList(Id, 0);

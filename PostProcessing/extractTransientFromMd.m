@@ -34,7 +34,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		disp(['======> Project reference solution to a finer mesh']);
 		ref_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,md.mask.ice_levelset,mdref.mesh.x, mdref.mesh.y);
 		analytical_sol = repmat(ref_sol, 1, repeatNt);
-		time_misfit = [0, time(ind)];
+		time_misfit = time(ind);
 	else
 		disp(['======> Use the computational mesh to evaluate the misfit for all the time steps']);
 		numerical_sol = ice_levelset;
