@@ -16,12 +16,6 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 	if isfield(md.results, 'analyticalSolution')
 		hasAnalytical = 1;
 		error('not updated the analytical_levelset, need to remove the duplicated data')
-		disp(['======> Found analytical soutions for ', folder]);
-		cxt = md.results.analyticalSettings.cxt;
-		cyt = md.results.analyticalSettings.cyt;
-		radius = md.results.analyticalSettings.radius;
-		domain = md.results.analyticalSettings.domain;
-		analytical_levelset = md.results.analyticalSolution;
 	else
 		hasAnalytical = 0;
 		% use the first round solution of advance phase as the reference solution
@@ -33,26 +27,19 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 
 	% recompute analytical solution if use finer mesh
 	if compareToFine 
-		disp(['======> Project solution to a finer mesh with ', num2str(mdref.mesh.numberofelements), ' elements']);
-		numerical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,ice_levelset,mdref.mesh.x, mdref.mesh.y);
+		disp(['======> Use a finer mesh with ', num2str(mdref.mesh.numberofelements), ' elements']);
+		ind = [NT:NT:length(time)];
+		numerical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,ice_levelset(:,ind),mdref.mesh.x, mdref.mesh.y);
 
-		if hasAnalytical
-			if strcmp(domain,'rectangle')
-				analytical_sol = setRectangleLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
-			else
-				analytical_sol = setLevelset(mdref.mesh.x, mdref.mesh.y, cxt, cyt, radius);
-			end
-			% project back to analytical levelset, for a better ploting
-			disp(['======> Project analytical solution from finer mesh to the computational mesh']);
-			analytical_levelset = InterpFromMeshToMesh2d(mdref.mesh.elements, mdref.mesh.x, mdref.mesh.y, analytical_sol, md.mesh.x, md.mesh.y);
-		else
-			disp(['======> Project reference solution to a finer mesh']);
-			ref_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,analytical_levelset,mdref.mesh.x, mdref.mesh.y);
-			analytical_sol = repmat(ref_sol, 1, repeatNt);
-		end
+		disp(['======> Project reference solution to a finer mesh']);
+		ref_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,md.mask.ice_levelset,mdref.mesh.x, mdref.mesh.y);
+		analytical_sol = repmat(ref_sol, 1, repeatNt);
+		time_misfit = [0, time(ind)];
 	else
+		disp(['======> Use the computational mesh to evaluate the misfit for all the time steps']);
 		numerical_sol = ice_levelset;
 		analytical_sol = repmat(analytical_levelset, 1, repeatNt);
+		time_misfit = time;
 	end
 
 	disp(['======> Calculate the misfit of the two sign functions']);
@@ -77,8 +64,8 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		savePath = [projPath, 'Models/', folder, '/'];
 		disp(['======> Saving to ', savePath]);
 		save([savePath, 'levelsetSolutions', '.mat'], 'name',...
-			'time', 'ice_levelset', 'analytical_levelset', 'repeatNt',  'total_misfit',...
-			'total_abs_misfit', 'sum_misfit', 'sum_abs_misfit');
+			'time', 'ice_levelset', 'analytical_levelset', 'repeatNt', 'NT', 'total_misfit',...
+			'total_abs_misfit', 'sum_misfit', 'sum_abs_misfit', 'time_misfit');
 		disp(['======> Saving complete ']);
 	end
 	%}}}
