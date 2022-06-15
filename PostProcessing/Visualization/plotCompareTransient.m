@@ -26,18 +26,18 @@ for iid = 1:length(Ids)
 	Ntrans = length(transData);
 	%}}}
 	%% Average behaviors {{{
-	figure('position',[0,600,800,600])
+	figure('position',[0,400,600,450])
 	nsub = 2;
 
 	for i = 1: Ntrans
 		time = transData{i}.time;
 		% number of misfit elements no abs
 		subplot(nsub,1,1)
-		plot(transData{i}.time_misfit, transData{i}.total_misfit/1e6, 'LineWidth', 1, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
+		plot([0,transData{i}.time_misfit], [0,transData{i}.total_misfit/1e6], 'LineWidth', 1.5, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
 		hold on
 
 		subplot(nsub,1,2)
-		plot(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6, 'LineWidth', 1, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
+		plot([0,transData{i}.time_misfit], [0,transData{i}.total_abs_misfit/1e6], 'LineWidth', 1.5, 'Color', colorstyle{mod((i-1), Nlines)+1},'LineStyle', linestyles{fix((i-1)/ Nlines)+1});
 		hold on
 	end
 	subplot(nsub, 1, 1);

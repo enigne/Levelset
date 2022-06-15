@@ -3,7 +3,7 @@ close all
 
 glacier = 'Levelset';
 compareToFine = 1;
-Id = 400;  % 310, 400, 410
+Id = 300;  % 310, 400, 410
 % Setting {{{ 
 stepName = 'Transient';
 saveflag = 1;
