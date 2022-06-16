@@ -57,6 +57,9 @@ function varargout=runme(varargin)
 	%GET reinitialization for levelset {{{
 	levelsetReinit = getfieldvalue(options,'levelset reinitialize', 1);
 	% }}}
+	%GET output frequency {{{
+	output_frequency = getfieldvalue(options,'output frequency', 1);
+	% }}}
 
 	%Load some necessary codes {{{
 	% main setting
@@ -398,7 +401,6 @@ function varargout=runme(varargin)
 		% set time
 		md.timestepping.start_time = 0;
 		md.timestepping.final_time = 2*finalTime*repeatNt;
-		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
 
 		% save the time settings to results
 		md.results.timesettings.finalTime = finalTime;
@@ -444,6 +446,10 @@ function varargout=runme(varargin)
 		md.initialization.vx(end,:) = timepoints;
 		md.initialization.vy(end,:) = timepoints;
 		md.initialization.vel(end,:) = timepoints;
+
+		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx(1:end-1, 1), md.initialization.vy(1:end-1,1)));
+		md.settings.output_frequency = output_frequency;
+		disp(['  ==== The output frequency is set to ', num2str(output_frequency), ', with the timestep dt=', num2str(md.timestepping.time_step)]);
 
 		disp(['  ==== Start to solve '])
 
@@ -472,7 +478,6 @@ function varargout=runme(varargin)
 		% set time
 		md.timestepping.start_time = 0;
 		md.timestepping.final_time = 2*finalTime*repeatNt;
-		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx, md.initialization.vy));
 
 		% save the time settings to results
 		md.results.timesettings.finalTime = finalTime;
@@ -518,6 +523,10 @@ function varargout=runme(varargin)
 		md.initialization.vx(end,:) = timepoints;
 		md.initialization.vy(end,:) = timepoints;
 		md.initialization.vel(end,:) = timepoints;
+
+		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx(1:end-1, 1), md.initialization.vy(1:end-1,1)));
+		md.settings.output_frequency = output_frequency;
+		disp(['  ==== The output frequency is set to ', num2str(output_frequency), ', with the timestep dt=', num2str(md.timestepping.time_step)]);
 
 		disp(['  ==== Start to solve '])
 
