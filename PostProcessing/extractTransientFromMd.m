@@ -20,7 +20,8 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		hasAnalytical = 0;
 		% use the first round solution of advance phase as the reference solution
 		repeatNt = md.results.timesettings.repeatNt;
-		NT = ceil(length(time)/repeatNt);
+		NT = floor(length(time)/repeatNt);
+		startT = ceil(length(time)/repeatNt);
 		analytical_levelset = ice_levelset(:, 1:NT);
 	end
 	disp(['======> Finish data extraction ', folder]);
@@ -28,7 +29,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 	% recompute analytical solution if use finer mesh
 	if compareToFine 
 		disp(['======> Use a finer mesh with ', num2str(mdref.mesh.numberofelements), ' elements']);
-		ind = [NT:NT:length(time)];
+		ind = [startT:NT:length(time)];
 		numerical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,ice_levelset(:,ind),mdref.mesh.x, mdref.mesh.y);
 
 		disp(['======> Project reference solution to a finer mesh']);

@@ -8,8 +8,8 @@ saveflag = 1;
 
 finalTime = 50;
 %Ids = [202, 203, 204, 212, 213, 214];
-Ids = [301, 302, 303, 304, 311, 401];
-figs = {'circle_parabola', 'circle_triangle', 'circle_gaussian', 'circle_uniform', 'circle_parabola_v5', 'rectangle_parabola'};
+Ids = [0];
+figs = {'circle_parabola_v5'};%, 'circle_triangle', 'circle_gaussian', 'circle_uniform', 'circle_parabola_v5', 'rectangle_parabola'};
 linestyles = {'-', ':', '--'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120'};
 Nlines = length(colorstyle) ;
