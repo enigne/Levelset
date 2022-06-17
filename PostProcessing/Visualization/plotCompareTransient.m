@@ -8,7 +8,7 @@ saveflag = 1;
 
 finalTime = 50;
 %Ids = [202, 203, 204, 212, 213, 214];
-Ids = [0];
+Ids = [311];
 figs = {'circle_parabola_v5'};%, 'circle_triangle', 'circle_gaussian', 'circle_uniform', 'circle_parabola_v5', 'rectangle_parabola'};
 linestyles = {'-', ':', '--'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120'};
