@@ -24,7 +24,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		startT = rem(length(time), repeatNt);
 		% if startT is not 0 then remove the first few steps
 		ice_levelset = ice_levelset(:, 1+startT:end);
-		time = time(:, 1+startT:end);
+		time = time(1+startT:end);
 		analytical_levelset = ice_levelset(:, 1:NT);
 	end
 	disp(['======> Finish data extraction ', folder]);
@@ -32,7 +32,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 	% recompute analytical solution if use finer mesh
 	if compareToFine 
 		disp(['======> Use a finer mesh with ', num2str(mdref.mesh.numberofelements), ' elements']);
-		ind = [1:NT:length(time)];
+		ind = [NT:NT:length(time)];
 		numerical_sol = InterpFromMeshToMesh2d(md.mesh.elements,md.mesh.x,md.mesh.y,ice_levelset(:,ind),mdref.mesh.x, mdref.mesh.y);
 
 		disp(['======> Project reference solution to a finer mesh']);
