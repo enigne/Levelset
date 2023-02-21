@@ -8,7 +8,7 @@ saveflag = 1;
 
 finalTime = 50;
 Ids = [304, 404, 301, 302, 303, 314];
-figs = {'semicircle_uniform_1000', 'rectangle_uniform_1000', 'semicircle_parabola_1000', 'semicircle_trangle_1000', 'semicircle_gaussian_1000', 'semicircle_uniform_5000'};
+figs = {'semicircle_uniform_1000', 'rectangle_uniform_1000', 'semicircle_parabola_1000', 'semicircle_triangle_1000', 'semicircle_gaussian_1000', 'semicircle_uniform_5000'};
 figtitles = {'Semicircle, uniform $v_0=1000$ m/a', 
 				'Straight line, uniform $v_0=1000$ m/a', 
 				'Semicircle, parabola $v_0=1000$ m/a', 
@@ -55,8 +55,12 @@ for iid = 1:length(Ids)
 	%	subplot(nsub, 1, 2);
 	title(figtitles{iid}, 'Interpreter', 'latex')
 	xlim([0, finalTime])
-	ylim([0, 25])
-	xlabel('Time (a)')
+	if Id ~= 314
+		ylim([0, 25])
+	else
+		ylim([0, 120])
+	end
+	xlabel('Time (a)', 'Interpreter', 'latex')
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
 
 	%	legend(nameList, 'Interpreter', 'latex','Orientation','vertical','Location','eastoutside')
