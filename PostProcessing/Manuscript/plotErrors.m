@@ -7,7 +7,7 @@ figNamePrefix = [pwd(), '/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-Ids = [304, 404, 301, 302, 303, 314];
+Ids = [304, 404, 301]; %, 302, 303, 314];
 figs = {'semicircle_uniform_1000', 'rectangle_uniform_1000', 'semicircle_parabola_1000', 'semicircle_triangle_1000', 'semicircle_gaussian_1000', 'semicircle_uniform_5000'};
 figtitles = {'Semicircle, uniform $v_0=1000$ m/a', 
 				'Straight line, uniform $v_0=1000$ m/a', 
@@ -17,7 +17,7 @@ figtitles = {'Semicircle, uniform $v_0=1000$ m/a',
 				'Semicircle, uniform $v_0=5000$ m/a', 
 				};
 linestyles = {'-', ':', '--'};
-colorstyle = {'#0072BD', '#D95319', '#EDB120'};
+colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
 Nlines = 3;
 % start the loop {{{
 for iid = 1:length(Ids)
@@ -36,13 +36,9 @@ for iid = 1:length(Ids)
 
 	for i = 1: Ntrans
 		time = transData{i}.time;
-		% number of misfit elements no abs
-		%		subplot(nsub,1,1)
-		%		plot(transData{i}.time_misfit, transData{i}.total_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{fix((i-1)/Nlines)+1},'Color', colorstyle{mod((i-1), Nlines)+1});
-		%		hold on
-
-		%		subplot(nsub,1,2)
-		plot(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{fix((i-1)/Nlines)+1},'Color', colorstyle{mod((i-1), Nlines)+1});
+		rows = fix((i-1)/Nlines)+1;
+		columns = mod((i-1), Nlines)+1;
+		semilogy(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{columns},'Color', colorstyle{rows});
 		hold on
 	end
 	%	subplot(nsub, 1, 1);
