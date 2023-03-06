@@ -65,7 +65,7 @@ for iid = 1:length(Ids)
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
 	title(figtitles{iid}, 'Interpreter', 'latex')
 	if contains(figtitles{iid}, '5000')
-		ylim([0,150])
+		ylim([0,160])
 	else
 		ylim([0,25])
 	end
@@ -75,5 +75,4 @@ for iid = 1:length(Ids)
 		export_fig([figName, '.pdf'])
 	end
 	%}}}
-
 end %}}}
