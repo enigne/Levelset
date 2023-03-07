@@ -7,14 +7,30 @@ figNamePrefix = [pwd(), '/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-Ids = [304, 404, 301]; %, 302, 303, 314];
-figs = {'semicircle_uniform_1000', 'rectangle_uniform_1000', 'semicircle_parabola_1000', 'semicircle_triangle_1000', 'semicircle_gaussian_1000', 'semicircle_uniform_5000'};
-figtitles = {'Semicircle, uniform $v_0=1000$ m/a', 
-				'Straight line, uniform $v_0=1000$ m/a', 
+Ids = [301, 302, 303, 304, 401, 404, 311, 314, 411, 414];
+figs = {
+			'semicircle_parabola_1000_all', 
+			'semicircle_triangle_1000_all', 
+			'semicircle_gaussian_1000_all', 
+			'semicircle_uniform_1000_all', 
+			'rectangle_parabola_1000_all' 
+			'rectangle_uniform_1000_all' 
+			'semicircle_parabola_5000_all',
+			'semicircle_uniform_5000_all',
+			'rectangle_parabola_5000_all', 
+			'rectangle_uniform_5000_all',
+			};
+figtitles = {
 				'Semicircle, parabola $v_0=1000$ m/a', 
 				'Semicircle, triangle $v_0=1000$ m/a', 
 				'Semicircle, gaussian $v_0=1000$ m/a', 
+				'Semicircle, uniform $v_0=1000$ m/a', 
+				'Straight line, parabola $v_0=1000$ m/a', 
+				'Straight line, uniform $v_0=1000$ m/a', 
+				'Semicircle, parabola $v_0=5000$ m/a', 
 				'Semicircle, uniform $v_0=5000$ m/a', 
+				'Straight line, parabola $v_0=5000$ m/a', 
+				'Straight line, uniform $v_0=5000$ m/a', 
 				};
 linestyles = {'-', ':', '--'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
@@ -32,12 +48,13 @@ for iid = 1:length(Ids)
 	Ntrans = length(transData);
 	%}}}
 	%% Average behaviors {{{
-	figure('position',[0,1000,600,200])
+	figure('position',[0,1000,600,600])
 
 	for i = 1: Ntrans
 		time = transData{i}.time;
 		rows = fix((i-1)/Nlines)+1;
 		columns = mod((i-1), Nlines)+1;
+		%plot(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{columns},'Color', colorstyle{rows});
 		semilogy(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{columns},'Color', colorstyle{rows});
 		hold on
 	end
@@ -50,11 +67,11 @@ for iid = 1:length(Ids)
 
 	%	subplot(nsub, 1, 2);
 	title(figtitles{iid}, 'Interpreter', 'latex')
-	xlim([0, finalTime])
-	if Id ~= 314
-		ylim([0, 25])
+	xlim([1, finalTime])
+	if contains(figtitles{iid}, '5000')
+		ylim([0, 160])
 	else
-		ylim([0, 120])
+		ylim([0, 45])
 	end
 	xlabel('Time (a)', 'Interpreter', 'latex')
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
