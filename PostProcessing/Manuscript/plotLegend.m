@@ -8,17 +8,19 @@ figName = 'legend';
 saveflag = 1;
 
 linestyles = {'-', ':', '--'};
-colorstyle = {'#0072BD', '#D95319', '#EDB120'};
-nameList = {'AD', 'UW', 'SUPG', 'reinit=1', 'reinit=10', 'reinit=100'};
+colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
+stabName = {'AD', 'UW', 'SUPG'};
+reinitName = {'reinit=1', 'reinit=10', 'reinit=100', 'reinit=200', 'reinit=0'};
+nameList = [reinitName, stabName];
 Nlines = 3;
 % start the loop {{{
-figure('position',[0,1000,600,200])
+figure('position',[0,1000,900,400])
 hold on
 for i = 1:length(colorstyle)
-	plot([1:10],[1:10], 'LineWidth', 2, 'Color', colorstyle{i}, 'LineStyle', '-')
+	plot([1:1],[1:1], 'LineWidth', 2, 'Color', colorstyle{i}, 'LineStyle', '-')
 end
 for i = 1:length(linestyles)
-	plot([1:10],[1:10], 'LineWidth', 2, 'Color', '#888888', 'LineStyle', linestyles{i})
+	plot([1:1],[1:1], 'LineWidth', 2, 'Color', '#888888', 'LineStyle', linestyles{i})
 end %}}}
 legend(nameList, 'Interpreter', 'latex','Orientation','horizontal','Location','northoutside')
 set(gcf,'color','w');
