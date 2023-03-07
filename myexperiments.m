@@ -9,7 +9,7 @@ if any(experiments == 1) % exp 1: circle and straight, v0=1000, all four vx, rei
 
 	finalTime = 0.5;
 	repeatNt = 50;
-	vx0 = [5000];
+	vx0 = [1000];
 	dt = 0.005;
 	output_frequency = 5;
 	reinit = [1, 10, 100];
