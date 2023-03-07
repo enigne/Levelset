@@ -48,7 +48,7 @@ for iid = 1:length(Ids)
 	Ntrans = length(transData);
 	%}}}
 	%% Average behaviors {{{
-	figure('position',[0,1000,600,600])
+	figure('position',[0,1000,600,400])
 
 	for i = 1: Ntrans
 		time = transData{i}.time;
@@ -71,7 +71,8 @@ for iid = 1:length(Ids)
 	if contains(figtitles{iid}, '5000')
 		ylim([0, 160])
 	else
-		ylim([0, 45])
+		%ylim([0, 45])
+		ylim([0, 160])
 	end
 	xlabel('Time (a)', 'Interpreter', 'latex')
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
