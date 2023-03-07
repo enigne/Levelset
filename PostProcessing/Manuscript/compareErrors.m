@@ -7,27 +7,27 @@ figNamePrefix = [pwd(), '/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-%Ids = [301, 302, 303, 304, 401, 404, 311, 314, 411, 414];
-Ids = [311, 314, 411, 414];
+Ids = [301, 302, 303, 304, 401, 404]; %, 311, 314, 411, 414];
+%Ids = [311, 314, 411, 414];
 figs = {
-		%	'semicircle_parabola_1000', 
-		%	'semicircle_triangle_1000', 
-		%	'semicircle_gaussian_1000', 
-		%	'semicircle_uniform_1000', 
-		%	'rectangle_parabola_1000' 
-		%	'rectangle_uniform_1000' 
+			'semicircle_parabola_1000', 
+			'semicircle_triangle_1000', 
+			'semicircle_gaussian_1000', 
+			'semicircle_uniform_1000', 
+			'rectangle_parabola_1000' 
+			'rectangle_uniform_1000' 
 			'semicircle_parabola_5000',
 			'semicircle_uniform_5000',
 			'rectangle_parabola_5000' 
 			'rectangle_uniform_5000' 
 			};
 figtitles = {
-		%		'Semicircle, parabola $v_0=1000$ m/a', 
-		%		'Semicircle, triangle $v_0=1000$ m/a', 
-		%		'Semicircle, gaussian $v_0=1000$ m/a', 
-		%		'Semicircle, uniform $v_0=1000$ m/a', 
-		%		'Straight line, parabola $v_0=1000$ m/a', 
-		%		'Straight line, uniform $v_0=1000$ m/a', 
+				'Semicircle, parabola $v_0=1000$ m/a', 
+				'Semicircle, triangle $v_0=1000$ m/a', 
+				'Semicircle, gaussian $v_0=1000$ m/a', 
+				'Semicircle, uniform $v_0=1000$ m/a', 
+				'Straight line, parabola $v_0=1000$ m/a', 
+				'Straight line, uniform $v_0=1000$ m/a', 
 				'Semicircle, parabola $v_0=5000$ m/a', 
 				'Semicircle, uniform $v_0=5000$ m/a', 
 				'Straight line, parabola $v_0=5000$ m/a', 
@@ -68,7 +68,7 @@ for iid = 1:length(Ids)
 	if contains(figtitles{iid}, '5000')
 		ylim([0,160])
 	else
-		ylim([0,25])
+		ylim([0,45])
 	end
 
 	set(gcf,'color','w');
