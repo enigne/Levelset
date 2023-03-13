@@ -1,0 +1,49 @@
+
+\documentclass{article}
+
+\makeatletter
+\makeatother
+
+
+\usepackage{tikz,pgflibraryshapes}
+\usetikzlibrary{arrows, calc, decorations.pathmorphing,plotmarks}
+
+\usepackage[psfixbb,graphics,tightpage,active]{preview}
+
+
+ 
+\PreviewEnvironment{tikzpicture}
+\newlength{\imagewidth}
+\newlength{\imagescale}
+
+\begin{document}
+
+\usetikzlibrary{calc,arrows}
+% constants
+\pgfmathsetmacro\xmin{0};
+\pgfmathsetmacro\xmax{10};
+\pgfmathsetmacro\ymin{0};
+\pgfmathsetmacro\ymax{10};
+
+% style
+\tikzset{boundary/.style={draw,color=black,line width=2pt}}
+\tikzset{levelset/.style={draw,color=blue,line width=2pt}}
+\tikzset{icefront/.style={draw,color=red,line width=2pt}}
+\tikzset{axis/.style={line width=1, fill=gray, draw=gray,-triangle 45,postaction={draw, line width=1, shorten >=7, -}}}
+\tikzset{arrow/.style={draw,color=black!50!white,line width=1pt}}
+\tikzset{empty node/.style={inner sep=0,outer sep=0}}
+
+\newpage
+\begin{center}
+	\begin{tikzpicture}
+	\node[inner sep=0pt] (a) at (0,0)
+    {\includegraphics[width=.5\textwidth]{rectangle.pdf}};
+    \node[inner sep=0pt] at (0, -3.2) {(a)};
+    
+    \node[inner sep=0pt] (b) at (7,0)
+    {\includegraphics[width=.5\textwidth]{semicircle.pdf}};
+    \node[inner sep=0pt] at (7, -3.2) {(b)};
+	\end{tikzpicture}
+\end{center}
+\end{document} 
+

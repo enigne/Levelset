@@ -1,0 +1,89 @@
+
+\documentclass{article}
+
+\makeatletter
+\makeatother
+
+
+\usepackage{tikz,pgflibraryshapes}
+\usetikzlibrary{arrows, calc, decorations.pathmorphing,plotmarks}
+
+\usepackage[psfixbb,graphics,tightpage,active]{preview}
+
+
+ 
+\PreviewEnvironment{tikzpicture}
+\newlength{\imagewidth}
+\newlength{\imagescale}
+
+\begin{document}
+
+\usetikzlibrary{calc,arrows}
+% constants
+\pgfmathsetmacro\xmin{0};
+\pgfmathsetmacro\xmax{10};
+\pgfmathsetmacro\ymin{0};
+\pgfmathsetmacro\ymax{10};
+
+% style
+\tikzset{boundary/.style={draw,color=black,line width=2pt}}
+\tikzset{levelset/.style={draw,color=blue,line width=2pt}}
+\tikzset{axis/.style={line width=1, fill=gray, draw=gray,-triangle 45,postaction={draw, line width=1, shorten >=7, -}}}
+\tikzset{arrow/.style={draw,color=black!50!white,line width=1pt}}
+\tikzset{empty node/.style={inner sep=0,outer sep=0}}
+\tikzset{icefront/.style={draw,color=red,line width=2pt}}
+
+\newpage
+\begin{center}
+	\begin{tikzpicture}
+	% Coordinate
+	\coordinate (lowleft) at (\xmin,\ymin);
+	\coordinate (lowright) at (\xmax, \ymin);
+	\coordinate (upleft) at (\xmin,\ymax);
+	\coordinate (upright) at (\xmax, \ymax);
+	\coordinate (xcoordleft) at ($(lowleft)!-0.2!(lowright)$);
+	\coordinate (xcoordright) at ($(lowleft)!1.3!(lowright)$);
+	\coordinate (ycoordleft) at ($(lowleft)!-0.2!(upleft)$);
+	\coordinate (ycoordright) at ($(lowleft)!1.3!(upleft)$);
+	
+	\coordinate (arcstart) at ({5/8*\xmax}, {3/4*\ymax});
+	\coordinate (arcend) at ({5/8*\xmax}, {1/4*\ymax});
+	\coordinate (arccenter) at ($(arcstart)!0.5!(arcend)$);
+	% The axis
+	\draw [axis] (xcoordleft) -> (xcoordright);
+	\draw [axis] (ycoordleft) -> (ycoordright);
+	
+	% The square
+	\draw[boundary] plot coordinates {(lowleft) (lowright) (upright) (upleft) (lowleft)};
+	
+	% straight line
+    \draw[icefront] (arcstart) -- (arcend);
+
+    % the side
+    \draw[levelset] (arcstart) -- ($(arcstart)+({3/8*\xmax},0)$);
+    \draw[levelset] (arcend) -- ($(arcend)+({3/8*\xmax},0)$);
+    
+    % arrows
+    % \draw[arrow, dashed, |-|] ($(arcend)+(0,{1/4*\ymax})$) -- ($(arcend)+({3/8*\xmax},{1/4*\ymax})$);
+    % \draw[arrow, dashed, |-|] ($(arcend)+(0,{1/4*\ymax})$) -- ($(arcend)+(0,{1/4*\ymax})+({cos(135)/4*\xmax}, {sin(135)/4*\ymax})$);
+
+    % labels
+    \LARGE
+    \node[empty node] at ($(lowleft)+({-0.1*\xmax}, {-0.05*\ymax})$) {$(0,0)$};
+    \node[empty node] at ($(lowright)+({0*\xmax}, {-0.05*\ymax})$) {$(L,0)$};
+    \node[empty node] at ($(upleft)+({-0.1*\xmax}, {0*\ymax})$) {$(0,L)$};
+
+    \node[empty node] at ($(arcstart)+({-0.1*\xmax},0)$) {$(\frac{3L}{8},\frac{3L}{4})$};
+    \node[empty node] at ($(arcend)+({-0.1*\xmax},0)$) {$(\frac{3L}{8},\frac{L}{4})$};
+    
+    \node[empty node] at ($(arcstart)+({(3/8+0.1)*\xmax},0)$) {$(L,\frac{3L}{4})$};
+    \node[empty node] at ($(arcend)+({(3/8+0.1)*\xmax},0)$) {$(L,\frac{L}{4})$};
+
+    % \node[empty node] at ($(arcend)+({3/16*\xmax},{(1/4+0.05)*\ymax})$) {$\frac{3L}{8}$};
+	\end{tikzpicture}
+
+\end{center}
+
+
+\end{document} 
+
