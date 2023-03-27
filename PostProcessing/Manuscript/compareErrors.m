@@ -7,7 +7,7 @@ figNamePrefix = [pwd(), '/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-Ids = [301, 302, 303, 304, 401, 404]; %, 311, 314, 411, 414];
+Ids = [301, 302, 303, 304, 401, 404, 311, 314, 411, 414];
 %Ids = [311, 314, 411, 414];
 figs = {
 			'semicircle_parabola_1000', 

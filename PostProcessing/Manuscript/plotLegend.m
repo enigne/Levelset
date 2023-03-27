@@ -10,7 +10,7 @@ saveflag = 1;
 linestyles = {'-', ':', '--'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
 stabName = {'AD', 'UW', 'SUPG'};
-reinitName = {'reinit=1', 'reinit=10', 'reinit=100', 'reinit=200', 'reinit=0'};
+reinitName = {'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=0$'};
 nameList = [reinitName, stabName];
 Nlines = 3;
 % start the loop {{{
