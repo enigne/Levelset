@@ -61,7 +61,7 @@ for iid = 1:length(Ids)
 	reerr = reshape(errors{iid},3,5)
 	figure('position',[0,1000,600,400])
 	bar(reerr)
-	legend({'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=0$'},'Interpreter','latex')
+	legend({'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'},'Interpreter','latex')
 	xticklabels({'AD', 'SU', 'SUPG'})
 	hAxes.TickLabelInterpreter = 'latex';
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
