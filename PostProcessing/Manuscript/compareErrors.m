@@ -7,7 +7,7 @@ figNamePrefix = [pwd(), '/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-Ids = [301, 302, 303, 304, 401, 404, 311, 314, 411, 414];
+Ids = [301, 302, 303, 304, 401, 404, 311, 312, 313, 314, 411, 414];
 %Ids = [311, 314, 411, 414];
 figs = {
 			'semicircle_parabola_1000', 
@@ -17,6 +17,8 @@ figs = {
 			'rectangle_parabola_1000' 
 			'rectangle_uniform_1000' 
 			'semicircle_parabola_5000',
+			'semicircle_triangle_5000', 
+			'semicircle_gaussian_5000', 
 			'semicircle_uniform_5000',
 			'rectangle_parabola_5000' 
 			'rectangle_uniform_5000' 
@@ -29,6 +31,8 @@ figtitles = {
 				'Straight line, parabola $v_0=1000$ m/a', 
 				'Straight line, uniform $v_0=1000$ m/a', 
 				'Semicircle, parabola $v_0=5000$ m/a', 
+				'Semicircle, triangle $v_0=5000$ m/a', 
+				'Semicircle, gaussian $v_0=5000$ m/a', 
 				'Semicircle, uniform $v_0=5000$ m/a', 
 				'Straight line, parabola $v_0=5000$ m/a', 
 				'Straight line, uniform $v_0=5000$ m/a', 
