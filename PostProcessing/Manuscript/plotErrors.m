@@ -69,10 +69,10 @@ for iid = 1:length(Ids)
 	title(figtitles{iid}, 'Interpreter', 'latex')
 	xlim([1, finalTime])
 	if contains(figtitles{iid}, '5000')
-		ylim([0.05, 80])
+		ylim([0.02, 80])
 	else
 		%ylim([0, 45])
-		ylim([0.05, 80])
+		ylim([0.02, 80])
 	end
 	xlabel('Time (a)', 'Interpreter', 'latex')
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
