@@ -1,4 +1,4 @@
-TARGET=domain.pdf compareFrontShape.pdf compareVelShape.pdf
+TARGET=domain.pdf compareFrontShape.pdf compareVelShape.pdf compareErrors.pdf
 
 all: $(TARGET)
 
