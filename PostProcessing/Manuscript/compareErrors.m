@@ -64,16 +64,16 @@ for iid = 1:length(Ids)
 	% plot{{{
 	reerr = reshape(errors{iid},3,5)
 	figure('position',[0,1000,600,400])
-	bar(reerr)
+	bar(reerr./2)
 	legend({'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'},'Interpreter','latex')
 	xticklabels({'AD', 'SU', 'SUPG'})
 	hAxes.TickLabelInterpreter = 'latex';
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
 	title(figtitles{iid}, 'Interpreter', 'latex')
 	if contains(figtitles{iid}, '5000')
-		ylim([0,45*5])
+		ylim([0,23*5])
 	else
-		ylim([0,45])
+		ylim([0,23])
 	end
 
 	set(gcf,'color','w');

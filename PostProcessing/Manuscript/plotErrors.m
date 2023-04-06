@@ -55,7 +55,7 @@ for iid = 1:length(Ids)
 		rows = fix((i-1)/Nlines)+1;
 		columns = mod((i-1), Nlines)+1;
 		%plot(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{columns},'Color', colorstyle{rows});
-		semilogy(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6, 'LineWidth', 2, 'LineStyle', linestyles{columns},'Color', colorstyle{rows});
+		semilogy(transData{i}.time_misfit, transData{i}.total_abs_misfit/1e6/2, 'LineWidth', 2, 'LineStyle', linestyles{columns},'Color', colorstyle{rows});
 		hold on
 	end
 	%	subplot(nsub, 1, 1);
@@ -69,10 +69,10 @@ for iid = 1:length(Ids)
 	title(figtitles{iid}, 'Interpreter', 'latex')
 	xlim([1, finalTime])
 	if contains(figtitles{iid}, '5000')
-		ylim([0.05, 160])
+		ylim([0.05, 80])
 	else
 		%ylim([0, 45])
-		ylim([0.05, 160])
+		ylim([0.05, 80])
 	end
 	xlabel('Time (a)', 'Interpreter', 'latex')
 	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
