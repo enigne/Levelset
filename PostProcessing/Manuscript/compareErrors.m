@@ -4,6 +4,7 @@ close all
 glacier = 'Levelset';
 projPath = ['/totten_1/chenggong/', glacier, '/'];
 figNamePrefix = [pwd(), '/Figures/'];
+plotflg = 0;
 saveflag = 1;
 
 finalTime = 50;
@@ -62,23 +63,25 @@ for iid = 1:length(Ids)
 	end
 	%}}}
 	% plot{{{
-	reerr = reshape(errors{iid},3,5)
-	figure('position',[0,1000,600,400])
-	bar(reerr./2)
-	legend({'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'},'Interpreter','latex')
-	xticklabels({'AD', 'SU', 'SUPG'})
-	hAxes.TickLabelInterpreter = 'latex';
-	ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
-	title(figtitles{iid}, 'Interpreter', 'latex')
-	if contains(figtitles{iid}, '5000')
-		ylim([0,23*5])
-	else
-		ylim([0,23])
-	end
+	reerr = reshape(errors{iid},3,5)/2
+	if plotflg 
+		figure('position',[0,1000,600,400])
+		bar(reerr./2)
+		legend({'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'},'Interpreter','latex')
+		xticklabels({'AD', 'SU', 'SUPG'})
+		hAxes.TickLabelInterpreter = 'latex';
+		ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
+		title(figtitles{iid}, 'Interpreter', 'latex')
+		if contains(figtitles{iid}, '5000')
+			ylim([0,23*5])
+		else
+			ylim([0,23])
+		end
 
-	set(gcf,'color','w');
-	if saveflag
-		export_fig([figName, '.pdf'])
+		set(gcf,'color','w');
+		if saveflag
+			export_fig([figName, '.pdf'])
+		end
 	end
 	%}}}
 end %}}}
