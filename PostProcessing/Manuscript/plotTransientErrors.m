@@ -6,9 +6,9 @@ projPath = ['/totten_1/chenggong/', glacier, '/'];
 figNamePrefix = [projPath, 'PostProcessing/Manuscript/Figures/'];
 saveflag = 1;
 st = 5; 
-re = 0;
-%folderList = {['20230307_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
-folderList = {['20230227_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
+re = 1;
+folderList = {['20230307_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
+%folderList = {['20230227_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 % Load data {{{
 % load model
 md = loadRefMd();
@@ -17,13 +17,13 @@ transData = loadData(folderList, 'levelset', [projPath, 'Models/']);
 NT = transData{1}.NT;
 %}}}
 % plot {{{
-id = 40;
-t = [2, 10, 25, 50];
+id = [40, 20, 40, 40];
+t = [1, 2, 2, 50];
 nplot = numel(t);
 for i = 1:length(transData)
 	for p = 1:nplot
-		tid = id+(t(p)-1)*NT;
-		dist = 0.5*(sign(transData{i}.ice_levelset(:,tid)) - sign(transData{i}.analytical_levelset(:,id)));
+		tid = id(p)+(t(p)-1)*NT;
+		dist = 0.5*(sign(transData{i}.ice_levelset(:,tid)) - sign(transData{i}.analytical_levelset(:,id(p))));
 		plotmodel(md, 'data', dist, 'figure', p, 'caxis', [-1,1], 'title', ['time=', num2str(transData{i}.time(tid))], 'figposition', [0,1000,500,400])
 		xlabel('x (m)')
 		ylabel('y (m)')

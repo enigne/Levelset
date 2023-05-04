@@ -4,39 +4,27 @@ close all
 glacier = 'Levelset';
 projPath = ['/totten_1/chenggong/', glacier, '/'];
 figNamePrefix = [pwd(), '/Figures/'];
-plotflg = 0;
+plotflg = 1;
 saveflag = 1;
 
 finalTime = 50;
-Ids = [301, 302, 303, 304, 401, 404, 311, 312, 313, 314, 411, 414];
-%Ids = [311, 314, 411, 414];
+%Ids = [301, 302, 303, 304, 401, 404, 311, 312, 313, 314, 411, 414];
+Ids = [301, 302, 304, 311, 312, 314];
 figs = {
 			'semicircle_parabola_1000', 
 			'semicircle_triangle_1000', 
-			'semicircle_gaussian_1000', 
 			'semicircle_uniform_1000', 
-			'rectangle_parabola_1000' 
-			'rectangle_uniform_1000' 
 			'semicircle_parabola_5000',
 			'semicircle_triangle_5000', 
-			'semicircle_gaussian_5000', 
 			'semicircle_uniform_5000',
-			'rectangle_parabola_5000' 
-			'rectangle_uniform_5000' 
 			};
 figtitles = {
-				'Semicircle, parabola $v_0=1000$ m/a', 
-				'Semicircle, triangle $v_0=1000$ m/a', 
-				'Semicircle, gaussian $v_0=1000$ m/a', 
-				'Semicircle, uniform $v_0=1000$ m/a', 
-				'Straight line, parabola $v_0=1000$ m/a', 
-				'Straight line, uniform $v_0=1000$ m/a', 
-				'Semicircle, parabola $v_0=5000$ m/a', 
-				'Semicircle, triangle $v_0=5000$ m/a', 
-				'Semicircle, gaussian $v_0=5000$ m/a', 
-				'Semicircle, uniform $v_0=5000$ m/a', 
-				'Straight line, parabola $v_0=5000$ m/a', 
-				'Straight line, uniform $v_0=5000$ m/a', 
+				'parabola $v_0=1000$ m/a', 
+				'triangle $v_0=1000$ m/a', 
+				'uniform $v_0=1000$ m/a', 
+				'parabola $v_0=5000$ m/a', 
+				'triangle $v_0=5000$ m/a', 
+				'uniform $v_0=5000$ m/a', 
 				};
 linestyles = {'-', ':', '--'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
