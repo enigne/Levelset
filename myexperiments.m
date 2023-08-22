@@ -12,9 +12,10 @@ if any(experiments == 1) % exp 1: circle and straight, v0=1000, all four vx, rei
 	vx0 = [1000];
 	dt = 0.005;
 	output_frequency = 5;
-	reinit = [1, 10, 100];
-	stablization = [1, 2, 5];
-	vxshapes = {'parabola', 'gaussian', 'triangle', 'uniform'};
+	reinit = [1];
+	stablization = [6];
+	%vxshapes = {'parabola', 'gaussian', 'triangle', 'uniform'};
+	vxshapes = {'uniform'};
 
 	for i = 1:length(reinit)
 		for j = 1:length(vxshapes)
