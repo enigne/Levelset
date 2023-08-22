@@ -9,26 +9,29 @@ saveflag = 1;
 
 finalTime = 50;
 %Ids = [301, 302, 304, 311, 312, 314];
-Ids = [401, 402, 404, 411, 412, 414];
+%Ids = [401, 402, 404, 411, 412, 414];
+Ids = [304, 404];
 figs = {
-			'rectangle_parabola_1000', 
-			'rectangle_triangle_1000', 
+%			'rectangle_parabola_1000', 
+%			'rectangle_triangle_1000', 
+			'circle_uniform_1000', 
 			'rectangle_uniform_1000', 
-			'rectangle_parabola_5000',
-			'rectangle_triangle_5000', 
-			'rectangle_uniform_5000',
+%			'rectangle_parabola_5000',
+%			'rectangle_triangle_5000', 
+%			'rectangle_uniform_5000',
 			};
 figtitles = {
-				'parabola $v_0=1000$ m/a', 
-				'triangle $v_0=1000$ m/a', 
+%				'parabola $v_0=1000$ m/a', 
+%				'triangle $v_0=1000$ m/a', 
 				'uniform $v_0=1000$ m/a', 
-				'parabola $v_0=5000$ m/a', 
-				'triangle $v_0=5000$ m/a', 
-				'uniform $v_0=5000$ m/a', 
+				'uniform $v_0=1000$ m/a', 
+%				'parabola $v_0=5000$ m/a', 
+%				'triangle $v_0=5000$ m/a', 
+%				'uniform $v_0=5000$ m/a', 
 				};
-linestyles = {'-', ':', '--'};
+
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
-Nlines = 3;
+Nlines = 4;
 % start the loop {{{
 errors = {};
 names = {};
@@ -51,12 +54,12 @@ for iid = 1:length(Ids)
 	end
 	%}}}
 	% plot{{{
-	reerr = reshape(errors{iid},3,5)/2
+	reerr = reshape(errors{iid},Nlines,5)/2
 	if plotflg 
 		figure('position',[0,1000,600,400])
 		bar(reerr)
 		legend({'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'},'Interpreter','latex')
-		xticklabels({'AD', 'SU', 'SUPG'})
+		xticklabels({'AD', 'SU', 'SUPG', 'Ua'})
 		hAxes.TickLabelInterpreter = 'latex';
 		ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
 		title(figtitles{iid}, 'Interpreter', 'latex')
