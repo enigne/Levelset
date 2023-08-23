@@ -8,26 +8,34 @@ plotflg = 1;
 saveflag = 1;
 
 finalTime = 50;
-%Ids = [301, 302, 304, 311, 312, 314];
-%Ids = [401, 402, 404, 411, 412, 414];
-Ids = [304, 404];
+Ids = [301, 302, 304, 311, 312, 314, 401, 402, 404, 411, 412, 414];
 figs = {
-%			'rectangle_parabola_1000', 
-%			'rectangle_triangle_1000', 
-			'circle_uniform_1000', 
+			'uniform_parabola_1000', 
+			'uniform_triangle_1000', 
+			'uniform_uniform_1000', 
+			'uniform_parabola_5000',
+			'uniform_triangle_5000', 
+			'uniform_uniform_5000',
+			'rectangle_parabola_1000', 
+			'rectangle_triangle_1000', 
 			'rectangle_uniform_1000', 
-%			'rectangle_parabola_5000',
-%			'rectangle_triangle_5000', 
-%			'rectangle_uniform_5000',
+			'rectangle_parabola_5000',
+			'rectangle_triangle_5000', 
+			'rectangle_uniform_5000',
 			};
 figtitles = {
-%				'parabola $v_0=1000$ m/a', 
-%				'triangle $v_0=1000$ m/a', 
+				'parabola $v_0=1000$ m/a', 
+				'triangle $v_0=1000$ m/a', 
 				'uniform $v_0=1000$ m/a', 
+				'parabola $v_0=5000$ m/a', 
+				'triangle $v_0=5000$ m/a', 
+				'uniform $v_0=5000$ m/a', 
+				'parabola $v_0=1000$ m/a', 
+				'triangle $v_0=1000$ m/a', 
 				'uniform $v_0=1000$ m/a', 
-%				'parabola $v_0=5000$ m/a', 
-%				'triangle $v_0=5000$ m/a', 
-%				'uniform $v_0=5000$ m/a', 
+				'parabola $v_0=5000$ m/a', 
+				'triangle $v_0=5000$ m/a', 
+				'uniform $v_0=5000$ m/a', 
 				};
 
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
