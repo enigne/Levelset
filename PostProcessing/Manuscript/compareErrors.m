@@ -10,12 +10,12 @@ saveflag = 1;
 finalTime = 50;
 Ids = [301, 302, 304, 311, 312, 314, 401, 402, 404, 411, 412, 414];
 figs = {
-			'uniform_parabola_1000', 
-			'uniform_triangle_1000', 
-			'uniform_uniform_1000', 
-			'uniform_parabola_5000',
-			'uniform_triangle_5000', 
-			'uniform_uniform_5000',
+			'semicircle_parabola_1000', 
+			'semicircle_triangle_1000', 
+			'semicircle_uniform_1000', 
+			'semicircle_parabola_5000',
+			'semicircle_triangle_5000', 
+			'semicircle_uniform_5000',
 			'rectangle_parabola_1000', 
 			'rectangle_triangle_1000', 
 			'rectangle_uniform_1000', 
