@@ -1,12 +1,12 @@
 clear
 close all
-
+addpath('../')
 glacier = 'Levelset';
 projPath = ['/totten_1/chenggong/', glacier, '/'];
-figNamePrefix = [projPath, 'PostProcessing/Manuscript/Figures/rect_'];
+figNamePrefix = [projPath, 'PostProcessing/Manuscript/Figures/'];
 saveflag = 1;
-stList = [1,2,5];
-reList = [1, 10, 100];
+stList = [6];
+reList = [1, 100];
 
 
 for ist = 1:numel(stList)
@@ -14,7 +14,8 @@ for ist = 1:numel(stList)
 		st = stList(ist); 
 		re = reList(ire);
 
-		folderList = {['20230307_LS_rectangle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
+		folderList = {[' 20230822_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
+		%folderList = {['20230307_LS_rectangle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		%folderList = {['20230227_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		% Load data {{{
 		% load model
