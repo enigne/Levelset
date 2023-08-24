@@ -14,7 +14,7 @@ for ist = 1:numel(stList)
 		st = stList(ist); 
 		re = reList(ire);
 
-		folderList = {[' 20230822_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
+		folderList = {['20230822_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		%folderList = {['20230307_LS_rectangle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		%folderList = {['20230227_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		% Load data {{{
@@ -36,7 +36,7 @@ for ist = 1:numel(stList)
 				xlabel('x (m)')
 				ylabel('y (m)')
 
-				figName = [figNamePrefix, 'errors_st', num2str(st), '_re', num2str(re), '_t', num2str(transData{i}.time(tid))];
+				figName = [figNamePrefix, 'errors_st', num2str(st), '_re', num2str(re), '_t', replace(num2str(transData{i}.time(tid)),'.','_')];
 				set(gcf,'color','w');
 				if saveflag
 					disp(['  Save to ', figName])
