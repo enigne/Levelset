@@ -66,8 +66,8 @@ for iid = 1:length(Ids)
 	if plotflg 
 		figure('position',[0,1000,600,400])
 		bar(reerr)
-		legend({'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'},'Interpreter','latex')
-		xticklabels({'AD', 'SU', 'SUPG', 'Ua'})
+		legend({'$n_R=1$', '$n_R=10$', '$n_R=100$', '$n_R=200$', '$n_R=\infty$'},'Interpreter','latex')
+		xticklabels({'AD', 'SU', 'SUPG', 'SUPG+FAB'})
 		hAxes.TickLabelInterpreter = 'latex';
 		ylabel('Absolute misfit area (km$^2$)', 'Interpreter', 'latex')
 		title(figtitles{iid}, 'Interpreter', 'latex')
