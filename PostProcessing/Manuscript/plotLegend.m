@@ -13,7 +13,7 @@ stabName = {'AD', 'UW', 'SUPG'};
 reinitName = {'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'};
 nameList = [reinitName, stabName];
 Nlines = 3;
-% start the loop {{{
+% Make the legend {{{
 figure('position',[0,1000,900,400])
 hold on
 for i = 1:length(colorstyle)
@@ -21,8 +21,23 @@ for i = 1:length(colorstyle)
 end
 for i = 1:length(linestyles)
 	plot([1:1],[1:1], 'LineWidth', 2, 'Color', '#888888', 'LineStyle', linestyles{i})
-end %}}}
+end 
 legend(nameList, 'Interpreter', 'latex','Orientation','horizontal','Location','northoutside')
+set(gcf,'color','w');
+if saveflag
+	export_fig([figNamePrefix, figName, '.pdf'])
+end
+%}}}
+% Make the colorbar {{{
+figName = 'colorbar';
+figure('position',[0,1000,400,200])
+imagesc([1,2],[1,2],[-1,1])
+cb = colorbar;
+colormap([ 0         0    0.5;
+0.5000    1.0000    0.5000;
+0.5000         0         0])
+cb.Ticks=[-1, 0, 1];
+cb.TickLabels={'-1','0','1'};
 set(gcf,'color','w');
 if saveflag
 	export_fig([figNamePrefix, figName, '.pdf'])
