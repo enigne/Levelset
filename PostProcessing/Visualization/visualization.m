@@ -2,8 +2,8 @@ clear
 close all
 
 nRows = 5;
-nCols = 3;
-subind = [1:15];
+nCols = 4;
+subind = [1:20];
 framesteps = 10;
 %Ids = [301, 302, 303, 304];   % circle parabola
 %movieNames = {'circle_parabola_v1000', 'circle_triangle_v1000', 'circle_gaussian_v1000', 'circle_uniform_v1000'};
