@@ -64,7 +64,7 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 	dt = 0.005;
 	output_frequency = 5;
 	reinit = [0, 1, 10, 100, 200];
-	stablization = [1,2,5,6];
+	stablization = [6];
 	%vxshapes = {'parabola', 'gaussian', 'triangle', 'uniform'};
 	vxshapes = { 'uniform'};
 
@@ -86,6 +86,7 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 						'levelset reinitialize', reinit(i),...
 						'savePath', [savePath]);
 
+					pause(1)
 					steps = [11];
 					savePath = [today, '_LS_rectangle_', vxshapes{j},'_vx', num2str(vx0(k)), '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
 					md = runme('steps', steps,...
@@ -99,6 +100,8 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 						'levelset stabilization', stablization(l),...
 						'levelset reinitialize', reinit(i),...
 						'savePath', [savePath]);
+
+					pause(1)
 				end
 			end
 		end
