@@ -60,13 +60,13 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 
 	finalTime = 0.5;
 	repeatNt = 50;
-	vx0 = [1000];
+	vx0 = [5000];
 	dt = 0.005;
 	output_frequency = 5;
 	reinit = [0, 1, 10, 100, 200];
-	stablization = [6];
+	stablization = [1,2,5,6];
 	%vxshapes = {'parabola', 'gaussian', 'triangle', 'uniform'};
-	vxshapes = { 'uniform'};
+	vxshapes = { 'uniform', 'parabola', 'triangle'};
 
 	for i = 1:length(reinit)
 		for j = 1:length(vxshapes)
@@ -86,7 +86,7 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 						'levelset reinitialize', reinit(i),...
 						'savePath', [savePath]);
 
-					pause(1)
+					pause(5)
 					steps = [11];
 					savePath = [today, '_LS_rectangle_', vxshapes{j},'_vx', num2str(vx0(k)), '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
 					md = runme('steps', steps,...
@@ -101,7 +101,7 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 						'levelset reinitialize', reinit(i),...
 						'savePath', [savePath]);
 
-					pause(1)
+					pause(5)
 				end
 			end
 		end
