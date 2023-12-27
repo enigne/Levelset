@@ -14,7 +14,7 @@ for ist = 1:numel(stList)
 		st = stList(ist); 
 		re = reList(ire);
 
-		folderList = {['20231219_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
+		folderList = {['20231219_LS_rectangle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		%folderList = {['20230307_LS_rectangle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		%folderList = {['20230227_LS_circle_uniform_vx1000_stab', num2str(st), '_reinit', num2str(re), '/']};
 		% Load data {{{
