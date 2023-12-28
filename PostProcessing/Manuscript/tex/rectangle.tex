@@ -53,6 +53,12 @@
 	\draw [axis] (xcoordleft) -> (xcoordright);
 	\draw [axis] (ycoordleft) -> (ycoordright);
 	
+	% ice -- blue
+	\fill [opacity=0.4,blue] (lowleft) -- (lowright) -- (upright) -- (upleft) -- (lowleft);
+	% no ice -- red
+	\fill [opacity=0.4,red] (arcstart) -- ($(arcstart)+({3/8*\xmax},0)$) --
+	($(arcend)+({3/8*\xmax},0)$) -- (arcend) -- (arcstart);
+
 	% The square
 	\draw[boundary] plot coordinates {(lowleft) (lowright) (upright) (upleft) (lowleft)};
 	
