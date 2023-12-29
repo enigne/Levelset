@@ -7,41 +7,39 @@ figNamePrefix = [pwd(), '/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-%Ids = [301, 302, 303, 304, 401, 404, 311, 314, 411, 414];
-Ids = [312, 402, 412]; 
+Ids = [501, 502, 504, 511, 512, 514, 601, 602, 604, 611, 612, 614];
 figs = {
-			'semicircle_triangle_5000_all', 
-			'rectangle_triangle_1000_all', 
-			'rectangle_triangle_5000_all', 
-	%		'semicircle_parabola_1000_all', 
-	%		'semicircle_triangle_1000_all', 
-	%		'semicircle_gaussian_1000_all', 
-	%		'semicircle_uniform_1000_all', 
-	%		'rectangle_parabola_1000_all' 
-	%		'rectangle_uniform_1000_all' 
-	%		'semicircle_parabola_5000_all',
-	%		'semicircle_uniform_5000_all',
-	%		'rectangle_parabola_5000_all', 
-	%		'rectangle_uniform_5000_all',
-			};
+      'semicircle_parabola_1000_all',
+      'semicircle_triangle_1000_all',
+      'semicircle_uniform_1000_all',
+      'semicircle_parabola_5000_all',
+      'semicircle_triangle_5000_all',
+      'semicircle_uniform_5000_all',
+      'rectangle_parabola_1000_all',
+      'rectangle_triangle_1000_all',
+      'rectangle_uniform_1000_all',
+      'rectangle_parabola_5000_all',
+      'rectangle_triangle_5000_all',
+      'rectangle_uniform_5000_all',
+         };
 figtitles = {
-			'Semicircle, triangle $v_0=5000$ m/a', 
-			'Straight line, triangle $v_0=1000$ m/a', 
-			'Straight line, triangle $v_0=5000$ m/a', 
-	%			'Semicircle, parabola $v_0=1000$ m/a', 
-	%			'Semicircle, triangle $v_0=1000$ m/a', 
-	%			'Semicircle, gaussian $v_0=1000$ m/a', 
-	%			'Semicircle, uniform $v_0=1000$ m/a', 
-	%			'Straight line, parabola $v_0=1000$ m/a', 
-	%			'Straight line, uniform $v_0=1000$ m/a', 
-	%			'Semicircle, parabola $v_0=5000$ m/a', 
-	%			'Semicircle, uniform $v_0=5000$ m/a', 
-	%			'Straight line, parabola $v_0=5000$ m/a', 
-	%			'Straight line, uniform $v_0=5000$ m/a', 
-				};
-linestyles = {'-', ':', '--'};
+            'parabola $v_0=1000$ m/a',
+            'triangle $v_0=1000$ m/a',
+            'uniform $v_0=1000$ m/a',
+            'parabola $v_0=5000$ m/a',
+            'triangle $v_0=5000$ m/a',
+            'uniform $v_0=5000$ m/a',
+            'parabola $v_0=1000$ m/a',
+            'triangle $v_0=1000$ m/a',
+            'uniform $v_0=1000$ m/a',
+            'parabola $v_0=5000$ m/a',
+            'triangle $v_0=5000$ m/a',
+            'uniform $v_0=5000$ m/a',
+            };
+
+linestyles = {'-', ':', '--', '-.'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
-Nlines = 3;
+Nlines = 4;
 % start the loop {{{
 for iid = 1:length(Ids)
 	Id = Ids(iid);
