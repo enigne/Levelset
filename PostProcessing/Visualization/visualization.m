@@ -7,10 +7,8 @@ subind = [1:20];
 framesteps = 10;
 %Ids = [301, 302, 303, 304];   % circle parabola
 %movieNames = {'circle_parabola_v1000', 'circle_triangle_v1000', 'circle_gaussian_v1000', 'circle_uniform_v1000'};
-%Ids = [304, 404, 314, 414];   % 
-Ids = [314, 414];   % 
-%movieNames = {'circle_uniform_v1000', 'rectangle_uniform_v1000', 'circle_uniform_v5000', 'rectangle_uniform_v5000'};
-movieNames = {'circle_uniform_v5000', 'rectangle_uniform_v5000'};
+Ids = [504, 604, 514, 614];   % 
+movieNames = {'circle_uniform_v1000', 'rectangle_uniform_v1000', 'circle_uniform_v5000', 'rectangle_uniform_v5000'};
 for i = 1: length(Ids)
 	generateAnimation('Id', Ids(i), 'movie name', movieNames{i}, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);
 end
