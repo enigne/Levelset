@@ -8,10 +8,10 @@ saveflag = 1;
 
 finalTime = 50;
 %Ids = [501, 502, 504, 511, 512, 514, 601, 602, 604, 611, 612, 614];
-Ids = [704, 804];
+Ids = [904, 1004];
 figs = {
-      'semicircle_200_uniform_1000_all',
-      'rectangle_200_uniform_1000_all',
+      'semicircle_400_uniform_1000_all',
+      'rectangle_400_uniform_1000_all',
 %      'semicircle_parabola_1000_all',
 %      'semicircle_triangle_1000_all',
 %      'semicircle_uniform_1000_all',
