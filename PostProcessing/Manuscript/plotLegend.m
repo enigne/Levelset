@@ -7,9 +7,9 @@ figNamePrefix = [pwd(), '/Figures/'];
 figName = 'legend';
 saveflag = 1;
 
-linestyles = {'-', ':', '--'};
+linestyles = {'-', ':', '--', '-.'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
-stabName = {'AD', 'UW', 'SUPG'};
+stabName = {'AD', 'UW', 'SUPG', 'SUPG+FAB'};
 reinitName = {'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'};
 nameList = [reinitName, stabName];
 Nlines = 3;
