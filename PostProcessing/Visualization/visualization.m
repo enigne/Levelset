@@ -9,7 +9,7 @@ framesteps = 10;
 %movieNames = {'circle_parabola_v1000', 'circle_triangle_v1000', 'circle_gaussian_v1000', 'circle_uniform_v1000'};
 Ids = [504, 604, 514, 614];   % 
 movieNames = {'circle_uniform_v1000', 'rectangle_uniform_v1000', 'circle_uniform_v5000', 'rectangle_uniform_v5000'};
-for i = 1: length(Ids)
+for i = 2: length(Ids)
 	generateAnimation('Id', Ids(i), 'movie name', movieNames{i}, 'nRows', nRows, 'nCols', nCols, 'index', subind, 'frame step', framesteps);
 end
 

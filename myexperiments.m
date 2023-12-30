@@ -2,7 +2,7 @@ clear
 close all
 
 today = datestr(date(), 'yyyymmdd');
-experiments = [5];
+experiments = [2];
 
 if any(experiments == 1) % exp 1: circle and straight, v0=1000, all four vx, reinit=[0,200] {{{
 
@@ -53,7 +53,7 @@ if any(experiments == 1) % exp 1: circle and straight, v0=1000, all four vx, rei
 	end
 end %}}}
 if any(experiments == 2) % exp 2: unstructured mesh{{{
-	steps = [1:3, 4:5];
+	steps = [1, 3];
 	md = runme('steps', steps);
 end %}}}
 if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, reinit=[0,1, 10, 100, 200] {{{
