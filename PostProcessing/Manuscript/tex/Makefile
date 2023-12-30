@@ -2,7 +2,7 @@ TARGET=domain.pdf transientStraight.pdf transientSemicircle.pdf compareVelShape.
 
 .PHONY : all finish clean
 
-all: $(TARGET)
+all: $(TARGET) finish
 
 domain.pdf:  rectangle.pdf semicircle.pdf
 
