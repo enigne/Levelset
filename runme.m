@@ -414,6 +414,9 @@ function varargout=runme(varargin)
 		md.levelset.reinit_frequency = levelsetReinit;
 		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
+		pos = find(md.mesh.vertexonboundary);
+		md.levelset.spclevelset(pos) = md.mask.ice_levelset(pos);
+
 		% no analytical solutions
 		% prepare the velocity field
 		disp(['  Use ', vxshape, ' shape for the velocity field']);
@@ -448,6 +451,11 @@ function varargout=runme(varargin)
 		md.initialization.vx(end,:) = timepoints;
 		md.initialization.vy(end,:) = timepoints;
 		md.initialization.vel(end,:) = timepoints;
+
+		pos = find(md.mesh.vertexonboundary);
+		md.initialization.vx(pos,:) = 0;
+		md.initialization.vy(pos,:) = 0;
+		md.initialization.vel(pos,:) = 0;
 
 		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx(1:end-1, 1), md.initialization.vy(1:end-1,1)));
 		md.settings.output_frequency = output_frequency;
@@ -491,6 +499,9 @@ function varargout=runme(varargin)
 		md.levelset.reinit_frequency = levelsetReinit;
 		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
 
+		pos = find(md.mesh.vertexonboundary);
+		md.levelset.spclevelset(pos) = md.mask.ice_levelset(pos);
+
 		% no analytical solutions
 		% prepare the velocity field
 		disp(['  Use ', vxshape, ' shape for the velocity field']);
@@ -525,6 +536,11 @@ function varargout=runme(varargin)
 		md.initialization.vx(end,:) = timepoints;
 		md.initialization.vy(end,:) = timepoints;
 		md.initialization.vel(end,:) = timepoints;
+
+		pos = find(md.mesh.vertexonboundary);
+		md.initialization.vx(pos,:) = 0;
+		md.initialization.vy(pos,:) = 0;
+		md.initialization.vel(pos,:) = 0;
 
 		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx(1:end-1, 1), md.initialization.vy(1:end-1,1)));
 		md.settings.output_frequency = output_frequency;

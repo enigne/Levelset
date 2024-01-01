@@ -64,7 +64,7 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 	dt = 0.0025;
 	output_frequency = 10;
 	reinit = [0, 1, 10, 100, 200];
-	stablization = [1,2,5,6];
+	stablization = [6];
 	%vxshapes = {'parabola', 'gaussian', 'triangle', 'uniform'};
 	vxshapes = { 'uniform', 'parabola', 'triangle'};
 

@@ -11,23 +11,12 @@ finalTime = 50;
 %Ids = [704, 804, 904, 1004];
 Ids = [ 511, 512, 514, 611, 612, 614];
 figs = {
-%      'semicircle_200_uniform_1000',
-%      'rectangle_200_uniform_1000',
-%      'semicircle_400_uniform_1000',
-%      'rectangle_400_uniform_1000',
-%     'semicircle_parabola_1000',
-%     'semicircle_triangle_1000',
-%     'semicircle_uniform_1000',
-      'semicircle_parabola_5000',
-      'semicircle_triangle_5000',
-      'semicircle_uniform_5000',
-      'rectangle_parabola_5000',
-      'rectangle_triangle_5000',
-      'rectangle_uniform_5000',
-%     'rectangle_parabola_1000',
-%     'rectangle_triangle_1000',
-%     'rectangle_uniform_1000',
-%     'rectangle_parabola_5000',
+      'semicircle_parabola_5000_all',
+      'semicircle_triangle_5000_all',
+      'semicircle_uniform_5000_all',
+      'rectangle_parabola_5000_all',
+      'rectangle_triangle_5000_all',
+      'rectangle_uniform_5000_all',
          };
 figtitles = {
 %            'mesh size 200 m',
