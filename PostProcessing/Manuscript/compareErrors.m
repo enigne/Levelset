@@ -9,8 +9,10 @@ saveflag = 1;
 
 finalTime = 50;
 %Ids = [501, 502, 504, 511, 512, 514, 601, 602, 604, 611, 612, 614];
-Ids = [904, 1004];
+Ids = [704, 804, 904, 1004];
 figs = {
+      'semicircle_200_uniform_1000',
+      'rectangle_200_uniform_1000',
       'semicircle_400_uniform_1000',
       'rectangle_400_uniform_1000',
 %		'semicircle_parabola_1000', 
@@ -25,8 +27,10 @@ figs = {
 %		'rectangle_parabola_5000',
          };
 figtitles = {
-            'uniform $v_0=1000$ m/a',
-            'uniform $v_0=1000$ m/a',
+            'mesh size 200 m',
+            'mesh size 200 m',
+            'mesh size 400 m',
+            'mesh size 400 m',
 %            'parabola $v_0=1000$ m/a',
 %            'triangle $v_0=1000$ m/a',
 %            'uniform $v_0=1000$ m/a',
@@ -76,6 +80,10 @@ for iid = 1:length(Ids)
 		title(figtitles{iid}, 'Interpreter', 'latex')
 		if contains(figtitles{iid}, '5000')
 			ylim([0,23*5])
+		elseif contains(figtitles{iid}, '200')
+			ylim([0,23*2])
+		elseif contains(figtitles{iid}, '400')
+			ylim([0,23*4])
 		else
 			ylim([0,23])
 		end
