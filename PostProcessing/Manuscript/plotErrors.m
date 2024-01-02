@@ -7,37 +7,42 @@ figNamePrefix = [pwd(), '/Figures/'];
 saveflag = 1;
 
 finalTime = 50;
-%Ids = [501, 502, 504, 511, 512, 514, 601, 602, 604, 611, 612, 614];
-%Ids = [704, 804, 904, 1004];
-Ids = [ 511, 512, 514, 611, 612, 614];
+Ids = [501, 502, 504, 511, 512, 514, 601, 602, 604, 611, 612, 614, 704, 804, 904, 1004];
 figs = {
+      'semicircle_parabola_1000_all',
+      'semicircle_triangle_1000_all',
+      'semicircle_uniform_1000_all',
       'semicircle_parabola_5000_all',
       'semicircle_triangle_5000_all',
       'semicircle_uniform_5000_all',
+      'rectangle_parabola_1000_all',
+      'rectangle_triangle_1000_all',
+      'rectangle_uniform_1000_all',
       'rectangle_parabola_5000_all',
       'rectangle_triangle_5000_all',
       'rectangle_uniform_5000_all',
+      'semicircle_200_uniform_1000_all',
+      'rectangle_200_uniform_1000_all',
+      'semicircle_400_uniform_1000_all',
+      'rectangle_400_uniform_1000_all',
          };
 figtitles = {
-%            'mesh size 200 m',
-%            'mesh size 200 m',
-%            'mesh size 400 m',
-%            'mesh size 400 m',
-%            'parabola $v_0=1000$ m/a',
-%            'triangle $v_0=1000$ m/a',
-%            'uniform $v_0=1000$ m/a',
+            'parabola $v_0=1000$ m/a',
+            'triangle $v_0=1000$ m/a',
+            'uniform $v_0=1000$ m/a',
             'parabola $v_0=5000$ m/a',
             'triangle $v_0=5000$ m/a',
             'uniform $v_0=5000$ m/a',
+            'parabola $v_0=1000$ m/a',
+            'triangle $v_0=1000$ m/a',
+            'uniform $v_0=1000$ m/a',
             'parabola $v_0=5000$ m/a',
             'triangle $v_0=5000$ m/a',
             'uniform $v_0=5000$ m/a',
-%            'parabola $v_0=1000$ m/a',
-%            'triangle $v_0=1000$ m/a',
-%            'uniform $v_0=1000$ m/a',
-%            'parabola $v_0=5000$ m/a',
-%            'triangle $v_0=5000$ m/a',
-%            'uniform $v_0=5000$ m/a',
+            'semicircle, mesh size 200 m',
+            'straight, mesh size 200 m',
+            'semicircle, mesh size 400 m',
+            'straight, mesh size 400 m',
             };
 
 linestyles = {'-', ':', '--', '-.'};

@@ -10,7 +10,7 @@ saveflag = 1;
 linestyles = {'-', ':', '--', '-.'};
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
 stabName = {'AD', 'UW', 'SUPG', 'SUPG+FAB'};
-reinitName = {'$\tau=1$', '$\tau=10$', '$\tau=100$', '$\tau=200$', '$\tau=\infty$'};
+reinitName = {'$n_R=1$', '$n_R=10$', '$n_R=100$', '$n_R=200$', '$n_R=\infty$'};
 nameList = [reinitName, stabName];
 Nlines = 3;
 % Make the legend {{{
