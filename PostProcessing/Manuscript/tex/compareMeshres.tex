@@ -11,7 +11,7 @@
 \usepackage[psfixbb,graphics,tightpage,active]{preview}
 
 
- 
+
 \PreviewEnvironment{tikzpicture}
 \newlength{\imagewidth}
 \newlength{\imagescale}
@@ -35,15 +35,24 @@
 \newpage
 \begin{center}
 	\begin{tikzpicture}
-    \footnotesize
-    	\node[inner sep=0pt] (a) at (0,0)
-        {\includegraphics[width=.5\textwidth]{../Figures/semicircle_uniform_1000.pdf}};
-        \node[inner sep=0pt] at (-2, 1.6) {(a)};
-        
-        \node[inner sep=0pt] (b) at (6.4,0)
-        {\includegraphics[width=.5\textwidth]{../Figures/semicircle_uniform_5000.pdf}};
-        \node[inner sep=0pt] at (4.6, 1.6) {(b)};
-    \end{tikzpicture}
+		\footnotesize
+		\node[inner sep=0pt] (a) at (0,0)
+		{\includegraphics[width=.5\textwidth]{../Figures/semicircle_200_uniform_1000.pdf}};
+		\node[inner sep=0pt] at (-1.8, 1.6) {(a)};
+
+		\node[inner sep=0pt] (b) at (6.4,0)
+		{\includegraphics[width=.5\textwidth]{../Figures/semicircle_400_uniform_1000.pdf}};
+		\node[inner sep=0pt] at (4.6, 1.6) {(b)};
+
+		\node[inner sep=0pt] (c) at (0,-4.6)
+		{\includegraphics[width=.5\textwidth]{../Figures/rectangle_200_uniform_1000.pdf}};
+		\node[inner sep=0pt] at (-1.8, -3) {(c)};
+
+		\node[inner sep=0pt] (d) at (6.4,-4.6)
+		{\includegraphics[width=.5\textwidth]{../Figures/rectangle_400_uniform_1000.pdf}};
+		\node[inner sep=0pt] at (4.6, -3) {(d)};
+		
+	\end{tikzpicture}
 \end{center}
 \end{document} 
 
