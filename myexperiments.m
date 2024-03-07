@@ -225,7 +225,7 @@ if any(experiments == 8) % exp 8: circle, v0=1000, all four vx with sin(t) varia
 	dt = 0.005;
 	output_frequency = 10;
 	reinit = [0];
-	stablization = [1];
+	stablization = [1, 2, 5, 6];
 	vxshapes = { 'uniform'};
 %	reinit = [0, 1, 10, 100, 200];
 %	stablization = [1,2,5,6];

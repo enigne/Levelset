@@ -607,8 +607,8 @@ function varargout=runme(varargin)
 
 		md.initialization.vx = zeros(md.mesh.numberofvertices+1, numel(timepoints));
 		md.initialization.vy = zeros(md.mesh.numberofvertices+1, numel(timepoints));
-		md.initialization.vx(1:end-1, :) = vx * (1.0+0.1*sin(timepoints*2*pi));
-		md.initialization.vy(1:end-1, :) = vy * (1.0+0.1*sin(timepoints*2*pi));
+		md.initialization.vx(1:end-1, :) = vx * (sin(timepoints*2*pi));
+		md.initialization.vy(1:end-1, :) = vy * (sin(timepoints*2*pi));
 		md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
 
 		md.initialization.vx(end,:) = timepoints;
