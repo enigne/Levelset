@@ -2,7 +2,7 @@ clear
 close all
 
 today = datestr(date(), 'yyyymmdd');
-experiments = [3];
+experiments = [8];
 
 if any(experiments == 1) % exp 1: circle and straight, v0=1000, all four vx, reinit=[0,200] {{{
 
@@ -60,11 +60,11 @@ if any(experiments == 3) % exp 3: circle and straight, v0=1000, all four vx, rei
 
 	finalTime = 0.5;
 	repeatNt = 50;
-	vx0 = [5000];
+	vx0 = [1000];
 	dt = 0.0025;
 	output_frequency = 10;
 	reinit = [0, 1, 10, 100, 200];
-	stablization = [6];
+	stablization = [1,2,5,6];
 	%vxshapes = {'parabola', 'gaussian', 'triangle', 'uniform'};
 	vxshapes = { 'uniform', 'parabola', 'triangle'};
 
@@ -211,6 +211,43 @@ if any(experiments == 7) % exp 7: circle and straight, v0=1000, 5000, uniform, 4
 						'levelset reinitialize', reinit(i),...
 						'savePath', [savePath]);
 
+					pause(5)
+				end
+			end
+		end
+	end
+end %}}}
+if any(experiments == 8) % exp 8: circle, v0=1000, all four vx with sin(t) variations, reinit=[0,1, 10, 100, 200] {{{
+
+	finalTime = 0.5;
+	repeatNt = 50;
+	vx0 = [1000];
+	dt = 0.005;
+	output_frequency = 10;
+	reinit = [0];
+	stablization = [1];
+	vxshapes = { 'uniform'};
+%	reinit = [0, 1, 10, 100, 200];
+%	stablization = [1,2,5,6];
+%	vxshapes = { 'uniform', 'parabola', 'triangle'};
+
+	for i = 1:length(reinit)
+		for j = 1:length(vxshapes)
+			for k = 1:length(vx0)
+				for l = 1:length(stablization)
+					savePath = [today, '_LS_circle_', vxshapes{j},'_vx', num2str(vx0(k)), '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
+					steps = [12];
+					md = runme('steps', steps,...
+						'dt', dt, ...
+						'cluster name', 'discovery',...
+						'output frequency', output_frequency, ...
+						'finalTime', finalTime,...
+						'vx shape', vxshapes{j},...
+						'vx', vx0(k),...
+						'repeat times', repeatNt, ...
+						'levelset stabilization', stablization(l),...
+						'levelset reinitialize', reinit(i),...
+						'savePath', [savePath]);
 					pause(5)
 				end
 			end

@@ -564,5 +564,83 @@ function varargout=runme(varargin)
 			system(['mv ', projPath, '/Models/Model_', glacier, '_', org.steps(org.currentstep).string, '.mat ', projPath, '/Models/', savePath, '/Model_', glacier, '_Transient.mat']);
 		end
 	end%}}}
+	if perform(org, 'Transient_circle_vx_sin_t')% {{{
+
+		md=loadmodel(org, 'SetMask');
+
+		% set time
+		md.timestepping.start_time = 0;
+		md.timestepping.final_time = 2*finalTime*repeatNt;
+
+		% save the time settings to results
+		md.results.timesettings.finalTime = finalTime;
+		md.results.timesettings.repeatNt = repeatNt;
+
+		% set stabilization
+		md.levelset.stabilization = levelsetStabilization;
+		disp(['  Levelset function uses stabilization ', num2str(md.levelset.stabilization)]);
+		md.levelset.reinit_frequency = levelsetReinit;
+		disp(['  Levelset function reinitializes every ', num2str(md.levelset.reinit_frequency), ' time steps']);
+
+		pos = find(md.mesh.vertexonboundary);
+		md.levelset.spclevelset(pos) = md.mask.ice_levelset(pos);
+
+		% no analytical solutions
+		% prepare the velocity field
+		disp(['  Use ', vxshape, ' shape for the velocity field']);
+		if (strcmp(vxshape, 'parabola'))
+			vx = vx0 *(1 -(md.mesh.y./cy -1).^2);
+		elseif (strcmp(vxshape, 'gaussian'))
+			sigma = 2*radius / 3.0;
+			vx = vx0 .* exp((-(md.mesh.y - cy).^2)./(2*sigma.^2));
+		elseif (strcmp(vxshape, 'triangle'))
+			vx = vx0 .* (1.0 - abs(md.mesh.y./cy-1));
+		elseif (strcmp(vxshape, 'uniform'))
+			vx = vx0 *ones(md.mesh.numberofvertices,1);
+		else
+			error('unknown shape of the horizontal velocity')
+		end
+		vy = vy0 *ones(md.mesh.numberofvertices,1);
+
+		% follow the time points
+		timepoints = linspace(md.timestepping.start_time, md.timestepping.final_time, ceil(repeatNt*(1/dt))+1);
+
+		md.initialization.vx = zeros(md.mesh.numberofvertices+1, numel(timepoints));
+		md.initialization.vy = zeros(md.mesh.numberofvertices+1, numel(timepoints));
+		md.initialization.vx(1:end-1, :) = vx * (1.0+0.1*sin(timepoints*2*pi));
+		md.initialization.vy(1:end-1, :) = vy * (1.0+0.1*sin(timepoints*2*pi));
+		md.initialization.vel = sqrt(md.initialization.vx.^2 + md.initialization.vy.^2);
+
+		md.initialization.vx(end,:) = timepoints;
+		md.initialization.vy(end,:) = timepoints;
+		md.initialization.vel(end,:) = timepoints;
+
+		pos = find(md.mesh.vertexonboundary);
+		md.initialization.vx(pos,:) = 0;
+		md.initialization.vy(pos,:) = 0;
+		md.initialization.vel(pos,:) = 0;
+
+		md.timestepping.time_step  = min(dt, cfl_step(md, md.initialization.vx(1:end-1, 1), md.initialization.vy(1:end-1,1)));
+		md.settings.output_frequency = output_frequency;
+		disp(['  ==== The output frequency is set to ', num2str(output_frequency), ', with the timestep dt=', num2str(md.timestepping.time_step)]);
+
+		disp(['  ==== Start to solve '])
+
+		%solve
+		md.miscellaneous.name = [savePath];
+		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
+		md.cluster = cluster;
+		md.settings.waitonlock = waitonlock; % do not wait for complete
+		md.verbose.solution = 0;
+
+		% Advance run
+		md=solve(md,'Transient','runtimename',false);
+
+		savemodel(org,md);
+		if ~strcmp(savePath, './')
+			system(['mkdir -p ', projPath, '/Models/', savePath]);
+			system(['mv ', projPath, '/Models/Model_', glacier, '_', org.steps(org.currentstep).string, '.mat ', projPath, '/Models/', savePath, '/Model_', glacier, '_Transient.mat']);
+		end
+	end%}}}
 	varargout{1} = md;
 	return;
