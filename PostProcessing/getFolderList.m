@@ -12,9 +12,15 @@ function [folderList, nameList] = getFolderList(Id, addobsCalving)
 	if Id == 0 % Latest tests {{{
 		folderList = {
 		'20240307_LS_circle_uniform_vx1000_stab1_reinit0';
+		'20240307_LS_circle_uniform_vx1000_stab2_reinit0';
+		'20240307_LS_circle_uniform_vx1000_stab5_reinit0';
+		'20240307_LS_circle_uniform_vx1000_stab6_reinit0';
 		};
 		nameList = {
 		'20240307_LS_circle_uniform_vx1000_stab1_reinit0';
+		'20240307_LS_circle_uniform_vx1000_stab2_reinit0';
+		'20240307_LS_circle_uniform_vx1000_stab5_reinit0';
+		'20240307_LS_circle_uniform_vx1000_stab6_reinit0';
 			};  %}}}
 		elseif Id == 1004 % 1004: unstructure mesh, 400 resolution rectangle uniform variable vx=1000{{{
 			folderList = {
