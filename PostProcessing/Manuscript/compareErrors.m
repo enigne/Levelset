@@ -8,47 +8,46 @@ plotflg = 1;
 saveflag = 1;
 
 finalTime = 50;
-Ids = [3004];
-%Ids = [501, 502, 504, 511, 512, 514, 601, 602, 604, 611, 612, 614, 704, 804, 904, 1004];
+Ids = [2004, 3004, 501, 502, 504, 511, 512, 514, 601, 602, 604, 611, 612, 614, 704, 804, 904, 1004];
 figs = {
 'semicircle_structured_uniform_1000', 
-%'semicircle_200_sin_t_1000',
-%		'semicircle_parabola_1000', 
-%		'semicircle_triangle_1000', 
-%		'semicircle_uniform_1000', 
-%		'semicircle_parabola_5000',
-%		'semicircle_triangle_5000', 
-%		'semicircle_uniform_5000',
-%		'rectangle_parabola_1000', 
-%		'rectangle_triangle_1000', 
-%		'rectangle_uniform_1000', 
-%		'rectangle_parabola_5000', 
-%		'rectangle_triangle_5000', 
-%		'rectangle_uniform_5000', 
-%      'semicircle_200_uniform_1000',
-%      'rectangle_200_uniform_1000',
-%      'semicircle_400_uniform_1000',
-%      'rectangle_400_uniform_1000',
+'semicircle_200_sin_t_1000',
+'semicircle_parabola_1000', 
+'semicircle_triangle_1000', 
+'semicircle_uniform_1000', 
+'semicircle_parabola_5000',
+'semicircle_triangle_5000', 
+'semicircle_uniform_5000',
+'rectangle_parabola_1000', 
+'rectangle_triangle_1000', 
+'rectangle_uniform_1000', 
+'rectangle_parabola_5000', 
+'rectangle_triangle_5000', 
+'rectangle_uniform_5000', 
+'semicircle_200_uniform_1000',
+'rectangle_200_uniform_1000',
+'semicircle_400_uniform_1000',
+'rectangle_400_uniform_1000',
 };
 figtitles = {
-'semicircle, structured mesh size 100 m',
-%	'semicircle, $v_x=1000\sin(2\pi t)$ m/a',
-%          'parabola $v_0=1000$ m/a',
-%          'triangle $v_0=1000$ m/a',
-%          'uniform $v_0=1000$ m/a',
-%          'parabola $v_0=5000$ m/a',
-%          'triangle $v_0=5000$ m/a',
-%          'uniform $v_0=5000$ m/a',
-%          'parabola $v_0=1000$ m/a',
-%          'triangle $v_0=1000$ m/a',
-%          'uniform $v_0=1000$ m/a',
-%          'parabola $v_0=5000$ m/a',
-%          'triangle $v_0=5000$ m/a',
-%          'uniform $v_0=5000$ m/a',
-%          'semicircle, mesh size 200 m',
-%          'straight, mesh size 200 m',
-%          'semicircle, mesh size 400 m',
-%          'straight, mesh size 400 m',
+'semicircle, symmetric mesh size 100 m',
+'semicircle, mesh 200 m, $v_x=1000\sin(2\pi t)$ m/a',
+'parabola $v_0=1000$ m/a',
+'triangle $v_0=1000$ m/a',
+'uniform $v_0=1000$ m/a',
+'parabola $v_0=5000$ m/a',
+'triangle $v_0=5000$ m/a',
+'uniform $v_0=5000$ m/a',
+'parabola $v_0=1000$ m/a',
+'triangle $v_0=1000$ m/a',
+'uniform $v_0=1000$ m/a',
+'parabola $v_0=5000$ m/a',
+'triangle $v_0=5000$ m/a',
+'uniform $v_0=5000$ m/a',
+'semicircle, mesh size 200 m',
+'straight, mesh size 200 m',
+'semicircle, mesh size 400 m',
+'straight, mesh size 400 m',
 };
 
 colorstyle = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E', '#77AC30'};
@@ -77,7 +76,7 @@ for iid = 1:length(Ids)
 	% plot{{{
 	reerr = reshape(errors{iid},Nlines,5)/2
 	if plotflg 
-		figure('position',[0,1000,600,400])
+		figure('position',[0,1000,450,300])
 		bar(reerr)
 		legend({'$n_R=1$', '$n_R=10$', '$n_R=100$', '$n_R=200$', '$n_R=\infty$'},'Interpreter','latex')
 		xticklabels({'AD', 'SU', 'SUPG', 'SUPG+FAB'})
