@@ -1,0 +1,53 @@
+
+\documentclass{article}
+
+\makeatletter
+\makeatother
+
+
+\usepackage{tikz,pgflibraryshapes}
+\usetikzlibrary{arrows, calc, decorations.pathmorphing,plotmarks}
+
+\usepackage[psfixbb,graphics,tightpage,active]{preview}
+
+
+ 
+\PreviewEnvironment{tikzpicture}
+\newlength{\imagewidth}
+\newlength{\imagescale}
+
+\begin{document}
+
+\usetikzlibrary{calc,arrows}
+% constants
+\pgfmathsetmacro\xmin{0};
+\pgfmathsetmacro\xmax{10};
+\pgfmathsetmacro\ymin{0};
+\pgfmathsetmacro\ymax{10};
+
+% style
+\tikzset{boundary/.style={draw,color=black,line width=2pt}}
+\tikzset{levelset/.style={draw,color=blue,line width=2pt}}
+\tikzset{axis/.style={line width=1, fill=gray, draw=gray,-triangle 45,postaction={draw, line width=1, shorten >=7, -}}}
+\tikzset{arrow/.style={draw,color=black!50!white,line width=1pt}}
+\tikzset{empty node/.style={inner sep=0,outer sep=0}}
+
+\newpage
+\begin{center}
+	\begin{tikzpicture}
+    \normalsize
+    	\node[inner sep=0pt] (a) at (0,0)
+        {\includegraphics[width=.35\textwidth]{../Figures/unstructured_mesh.pdf}};
+        \node[inner sep=0pt] at (-2, 2.1) {(a)};
+        
+        \node[inner sep=0pt] (b) at (4.8,0)
+		  {\includegraphics[width=.35\textwidth]{../Figures/diagonal_mesh.pdf}};
+        \node[inner sep=0pt] at (2.8, 2.1) {(b)};
+
+        \node[inner sep=0pt] (c) at (9.6,0)
+		  {\includegraphics[width=.35\textwidth]{../Figures/symmetric_mesh.pdf}};
+        \node[inner sep=0pt] at (7.6, 2.1) {(c)};
+    \end{tikzpicture}
+\end{center}
+\end{document} 
+
