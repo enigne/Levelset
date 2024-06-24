@@ -88,10 +88,10 @@ function varargout=runme(varargin)
 
 	%%%%%% Step 1--10
 	if perform(org, 'Mesh')% {{{
-		%md=squaremesh(model(), Lx, Ly, nx, ny);
+		md=squaremesh(model(), Lx, Ly, nx, ny);
 %		md=triangle(model(), 'Exp/square.exp', Lx/nx);
 		% symmetric mesh
-		md=squaremesh(model(), Lx, Ly, nx, ny, 1, 3);
+	%	md=squaremesh(model(), Lx, Ly, nx, ny, 1, 3);
 		savemodel(org,md);
 	end %}}}
 	if perform(org, 'SuperfineMesh')% {{{

@@ -2,7 +2,7 @@ clear
 close all
 
 today = datestr(date(), 'yyyymmdd');
-experiments = [2, 9];
+experiments = [12];
 
 if any(experiments == 1) % exp 1: circle and straight, v0=1000, all four vx, reinit=[0,200] {{{
 
@@ -262,6 +262,44 @@ if any(experiments == 9) % exp 9: circle, v0=1000, all four vx, reinit=[0,1, 10,
 	output_frequency = 10;
 	reinit = [0, 1, 10, 100, 200];
 	stablization = [1,2,5,6];
+	vxshapes = { 'uniform'};
+
+	for i = 1:length(reinit)
+		for j = 1:length(vxshapes)
+			for k = 1:length(vx0)
+				for l = 1:length(stablization)
+					savePath = [today, '_LS_circle_', vxshapes{j},'_vx', num2str(vx0(k)), '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
+					steps = [10];
+					md = runme('steps', steps,...
+						'cluster name', 'discovery',...
+						'dt', dt, ...
+						'output frequency', output_frequency, ...
+						'finalTime', finalTime,...
+						'vx shape', vxshapes{j},...
+						'vx', vx0(k),...
+						'repeat times', repeatNt, ...
+						'levelset stabilization', stablization(l),...
+						'levelset reinitialize', reinit(i),...
+						'savePath', [savePath]);
+					pause(5)
+				end
+			end
+		end
+	end
+end %}}}
+if any(experiments == 11) % exp 11: structured mesh{{{
+	steps = [1, 3:5];
+	md = runme('steps', steps, 'nx', 400);
+end %}}}
+if any(experiments == 12) % exp 12: circle, v0=1000, all four vx, reinit=[0,1, 10, 100, 200] {{{
+
+	finalTime = 0.5;
+	repeatNt = 50;
+	vx0 = [1000];
+	dt = 0.0025;
+	output_frequency = 10;
+	reinit = [1];
+	stablization = [1];
 	vxshapes = { 'uniform'};
 
 	for i = 1:length(reinit)
