@@ -289,14 +289,14 @@ if any(experiments == 9) % exp 9: circle, v0=1000, all four vx, reinit=[0,1, 10,
 end %}}}
 if any(experiments == 11) % exp 11: structured mesh{{{
 	steps = [1, 3:5];
-	md = runme('steps', steps, 'nx', 400);
+	md = runme('steps', steps, 'nx', 800);
 end %}}}
 if any(experiments == 12) % exp 12: circle, v0=1000, all four vx, reinit=[0,1, 10, 100, 200] {{{
 
 	finalTime = 0.5;
 	repeatNt = 50;
 	vx0 = [1000];
-	dt = 0.0025;
+	dt = 0.0025/2;
 	output_frequency = 10;
 	reinit = [1];
 	stablization = [1];
