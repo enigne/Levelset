@@ -69,7 +69,7 @@ function extractTransientFromMd(md, projPath, folder, dataName, mdref, saveflag)
 		disp(['======> Saving to ', savePath]);
 		save([savePath, 'levelsetSolutions', '.mat'], 'name',...
 			'time', 'ice_levelset', 'analytical_levelset', 'repeatNt', 'NT', 'total_misfit',...
-			'total_abs_misfit', 'sum_misfit', 'sum_abs_misfit', 'time_misfit');
+			'total_abs_misfit', 'sum_misfit', 'sum_abs_misfit', 'time_misfit', '-v7.3');
 		disp(['======> Saving complete ']);
 	end
 	%}}}
