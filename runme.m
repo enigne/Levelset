@@ -78,7 +78,7 @@ function varargout=runme(varargin)
 		cluster.time = jobTime;
 		waitonlock = 0;
 	else
-		cluster=generic('name',oshostname(),'np', 30);
+		cluster=generic('name',oshostname(),'np', 80);
 		waitonlock = Inf;
 	end
 	clear clustername
@@ -470,7 +470,7 @@ function varargout=runme(varargin)
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
 		md.cluster = cluster;
 		md.settings.waitonlock = waitonlock; % do not wait for complete
-		md.verbose.solution = 0;
+	%	md.verbose.solution = 0;
 
 		% Advance run
 		md=solve(md,'Transient','runtimename',false);

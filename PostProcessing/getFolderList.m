@@ -11,10 +11,10 @@ function [folderList, nameList] = getFolderList(Id, addobsCalving)
 	end
 	if Id == 0 % Latest tests {{{
 		folderList = {
-	'20240624_LS_circle_uniform_vx1000_stab1_reinit1/',
+	'20240625_LS_circle_uniform_vx1000_stab1_reinit1/',
 		};
 		nameList = {
-	'20240624_LS_circle_uniform_vx1000_stab1_reinit1/',
+	'20240625_LS_circle_uniform_vx1000_stab1_reinit1/',
 			};  %}}}
 		elseif Id == 3004 % 3004: structure mesh, 100 resolution circle uniform variable vx=1000{{{
 			folderList = {

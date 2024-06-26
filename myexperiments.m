@@ -296,7 +296,7 @@ if any(experiments == 12) % exp 12: circle, v0=1000, all four vx, reinit=[0,1, 1
 	finalTime = 0.5;
 	repeatNt = 50;
 	vx0 = [1000];
-	dt = 0.0025/2;
+	dt = 0.0025;
 	output_frequency = 10;
 	reinit = [1];
 	stablization = [1];
@@ -309,7 +309,6 @@ if any(experiments == 12) % exp 12: circle, v0=1000, all four vx, reinit=[0,1, 1
 					savePath = [today, '_LS_circle_', vxshapes{j},'_vx', num2str(vx0(k)), '_stab', num2str(stablization(l)), '_reinit', num2str(reinit(i))];
 					steps = [10];
 					md = runme('steps', steps,...
-						'cluster name', 'discovery',...
 						'dt', dt, ...
 						'output frequency', output_frequency, ...
 						'finalTime', finalTime,...
