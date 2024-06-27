@@ -78,7 +78,7 @@ function varargout=runme(varargin)
 		cluster.time = jobTime;
 		waitonlock = 0;
 	else
-		cluster=generic('name',oshostname(),'np', 30);
+		cluster=generic('name',oshostname(),'np', 80);
 		waitonlock = Inf;
 	end
 	clear clustername
@@ -88,10 +88,10 @@ function varargout=runme(varargin)
 
 	%%%%%% Step 1--10
 	if perform(org, 'Mesh')% {{{
-		%md=squaremesh(model(), Lx, Ly, nx, ny);
+		md=squaremesh(model(), Lx, Ly, nx, ny);
 %		md=triangle(model(), 'Exp/square.exp', Lx/nx);
 		% symmetric mesh
-		md=squaremesh(model(), Lx, Ly, nx, ny, 1, 3);
+	%	md=squaremesh(model(), Lx, Ly, nx, ny, 1, 3);
 		savemodel(org,md);
 	end %}}}
 	if perform(org, 'SuperfineMesh')% {{{
@@ -470,7 +470,7 @@ function varargout=runme(varargin)
 		md.toolkits.DefaultAnalysis=bcgslbjacobioptions();
 		md.cluster = cluster;
 		md.settings.waitonlock = waitonlock; % do not wait for complete
-		md.verbose.solution = 0;
+	%	md.verbose.solution = 0;
 
 		% Advance run
 		md=solve(md,'Transient','runtimename',false);
