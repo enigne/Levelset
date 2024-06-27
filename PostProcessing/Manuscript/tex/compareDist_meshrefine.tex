@@ -1,0 +1,85 @@
+
+\documentclass{article}
+
+\makeatletter
+\makeatother
+
+
+\usepackage{tikz,pgflibraryshapes}
+\usetikzlibrary{arrows, calc, decorations.pathmorphing,plotmarks}
+
+\usepackage[psfixbb,graphics,tightpage,active]{preview}
+
+
+
+\PreviewEnvironment{tikzpicture}
+\newlength{\imagewidth}
+\newlength{\imagescale}
+
+\begin{document}
+
+\usetikzlibrary{calc,arrows}
+% constants
+\pgfmathsetmacro\Lx{4.5};
+\pgfmathsetmacro\Ly{-4.5};
+\pgfmathsetmacro\dx{-1.2};
+\pgfmathsetmacro\dy{1.6};
+
+
+% style
+\tikzset{boundary/.style={draw,color=black,line width=2pt}}
+\tikzset{levelset/.style={draw,color=blue,line width=2pt}}
+\tikzset{axis/.style={line width=1, fill=gray, draw=gray,-triangle 45,postaction={draw, line width=1, shorten >=7, -}}}
+\tikzset{arrow/.style={draw,color=black!50!white,line width=1pt}}
+\tikzset{empty node/.style={inner sep=0,outer sep=0}}
+
+\newpage
+\begin{center}
+	\begin{tikzpicture}
+		\footnotesize
+		\node[inner sep=0pt] (c) at ({2*\Lx}, {0*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/errors_st1_re1_t50}};
+		\node[inner sep=0pt] at ({2*\Lx+\dx}, {0*\Ly+\dy}) {(c)};
+		
+		\node[inner sep=0pt] (b) at ({1*\Lx}, {0*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/errors_st1_re1_t2}};
+		\node[inner sep=0pt] at ({1*\Lx+\dx}, {0*\Ly+\dy}) {(b)};
+		
+		\node[inner sep=0pt] (a) at ({0*\Lx}, {0*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/errors_st1_re1_t1_5}};
+		\node[inner sep=0pt] at ({0*\Lx+\dx}, {0*\Ly+\dy}) {(a)};
+
+		\node[inner sep=0pt] (c) at ({2*\Lx}, {1*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/refine50/errors_st1_re1_t50}};
+		\node[inner sep=0pt] at ({2*\Lx+\dx}, {1*\Ly+\dy}) {(f)};
+		
+		\node[inner sep=0pt] (b) at ({1*\Lx}, {1*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/refine50/errors_st1_re1_t2}};
+		\node[inner sep=0pt] at ({1*\Lx+\dx}, {1*\Ly+\dy}) {(e)};
+		
+		\node[inner sep=0pt] (a) at ({0*\Lx}, {1*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/refine50/errors_st1_re1_t1_5}};
+		\node[inner sep=0pt] at ({0*\Lx+\dx}, {1*\Ly+\dy}) {(d)};
+
+		\node[inner sep=0pt] (c) at ({2*\Lx}, {2*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/refine25/errors_st1_re1_t50}};
+		\node[inner sep=0pt] at ({2*\Lx+\dx}, {2*\Ly+\dy}) {(i)};
+		
+		\node[inner sep=0pt] (b) at ({1*\Lx}, {2*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/refine25/errors_st1_re1_t2}};
+		\node[inner sep=0pt] at ({1*\Lx+\dx}, {2*\Ly+\dy}) {(h)};
+		
+		\node[inner sep=0pt] (a) at ({0*\Lx}, {2*\Ly})
+		{\includegraphics[width=.4\textwidth, trim=0 38 60 0, clip]{../Figures/diagonalmesh/refine25/errors_st1_re1_t1_5}};
+		\node[inner sep=0pt] at ({0*\Lx+\dx}, {2*\Ly+\dy}) {(g)};
+
+		\node[inner sep=0pt] (l) at ({2.7*\Lx}, {2*\Ly-0.5})
+		{\includegraphics[width=.07\textwidth, trim=300 0 0 0, clip]{../Figures/colorbar}};
+		\normalsize
+		\node[inner sep=0pt, rotate=90] at ({0*\Lx+2.3*\dx}, {0*\Ly}) {$\Delta x=100$~m};
+		\node[inner sep=0pt, rotate=90] at ({0*\Lx+2.3*\dx}, {1*\Ly}) {$\Delta x=50$~m};
+		\node[inner sep=0pt, rotate=90] at ({0*\Lx+2.3*\dx}, {2*\Ly}) {$\Delta x=25$~m};
+	\end{tikzpicture}
+\end{center}
+\end{document} 
+
